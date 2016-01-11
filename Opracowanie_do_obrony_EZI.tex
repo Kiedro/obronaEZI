@@ -1,0 +1,372 @@
+\documentclass[]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{hhline}
+\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+
+\usepackage{lmodern}
+\usepackage{float}
+\selectlanguage{polish}
+\usepackage{amsmath}
+\renewcommand*\thesection{\arabic{section}} % zmiana numeracji sekcji 0.X -> X
+\author{EZI Team}
+\title{Opracowanie pytań do obrony (EZI)}
+\frenchspacing
+\begin{document}
+\maketitle
+%\bigskip 
+\tableofcontents %spis tresci
+\thispagestyle{empty}
+
+
+\part{Zagadnienia specjalnościowe}
+\bigskip
+\section{Sterowniki mikroprocesorowe i ich zastosowania}
+
+Główną częścią takiego sterownika jest mikrokontroler pełniący funkcję jednostki wykonującej operacje logiczne i arytmetyczne.
+
+
+
+
+
+
+
+
+\section{Lokalne sieci komputerowe}
+
+
+\section{Bazy danych i ich zastosowania}
+\newpage
+\section{Przetwarzanie obrazów, metody i zastosowania}
+\subparagraph{Reprezentacja obrazu}
+Obraz cyfrowy powstaje poprzez kwantyzację i próbkowanie obrazu analogowego. Wynikiem jest uporządkowana siatka kwadratów, z których każdy zawiera informację o obrazie wejściowym jak np. średnia jasność w obszarze. Każdy z kwadratów siatki zwany jest pikselem, a ich liczba i wielkość są podstawowymi wartościami opisującymi matryce służące do akwizycji obrazu jak CCD lub CMOS.
+
+Rozróżniamy obrazy jednobarwne - \textit{monochromatyczne}, binarne, barwne.
+
+Cyfrowy zapis obrazu polega na zdefiniowaniu przestrzeni barw w jakiej zapisujemy obraz (RGB, CMYK, inne), głębi obrazu - czyli bitów na kanał co określa ilość możliwych do przedstawienia barw. Przykładowo: \\
+typowa kamerka internetowa - ramka obrazu składa się z trzech kanałów - obrazów monochromatycznych, dla których zakres wartości przypisywanych pikselom należy do przedziału 0-255. Kanały reprezentują kolory z palety barw RBG, obraz końcowy powstaje poprzez złączenie wszystkich kanałów. 
+Zapewnia to 24-bitową głębie kolorów (3 kanały po 8 bitów), tzn. pozwala reprezentować $2^{24}$  kolorów. Tryb ten nazywany jest \textit{true color}. 
+4 kanałem często używanym np. w formacie png może być kanał A \textit{Alpha} odpowiadający za (nie)-przeźroczystość.
+
+\subsection{Algorytmy przetwarzania obrazów}
+\subparagraph{Ogólnie}
+Pojęcie \textbf{przetwarzania obrazów} można rozumieć rozmaicie. W wąskim sensie oznacza operacje, które przetwarzają jedne obrazy w inne - zarówno dane wejściowe jak i wyjściowe mają formę obrazu. W tym sensie zawierają się:
+\begin{itemize}
+	\item akwizycja obrazów - wprowadzenie obrazów, zwłaszcza cyfrowych do systemów technicznych (sorki, brzydka definicja),
+	\item reprezentacja obrazu i modelowanie - dobór reprezentacji obrazu w systemie tech., by odpowiadała ona charakterowi obrazu i przeznaczeniu reprezentacji, również modele matematyczne obrazów. Głębia, przestrzeń barw
+	\item polepszanie obrazów - wytwarzanie obrazów subiektywnie ocenianych przez człowieka jako lepsze
+	\item odzyskiwanie, restauracja obrazów - usuwanie zniekształceń (geometrycznych), zakłóceń (szumy, rozmycia)
+	\item kompresja obrazów - oczywiste
+	\item znakowanie wodne - umieszczanie i odczytywanie dodatkowych, często niewidocznych informacji
+	\item prezentacja, wyświetlanie obrazów
+\end{itemize}
+	
+	Z tego punktu widzenia grafika komputerowa, animacje komputerowe stanowią oddzielną grupę metod.
+	
+	W szerszym sensie do przetwarzania obrazów zalicza się \textbf{analizę obrazów}, w której dane wejściowe odpowiadają obrazom, natomiast dane wyjściowe mają inny charakter. A analizą obrazów związane jest \textbf{rozpoznawanie wzorców} którego celem jest identyfikacja pewnych struktur w obrazach.
+	
+	3 kategorię metod przetwarzania stanowi \textbf{analiza obrazów}:
+\begin{itemize}
+	\item analiza ogólnych cech obrazu lub jego fragmentu - np. analiza cech ilościowych wartości pikseli, barwy punktów
+	\item ekstrakcja cech - np. krawędzi, struktur geometrycznych
+	\item segmentacja - podział obrazu na spójne obszary o podobnych cechach (ruch, kolor)
+	\item analiza tekstur - wydzielenie np. drewna, tkaniny i analiza cech
+	\item analiza sceny i zdarzeń - określanie zależności przestrzennych i czasowych pomiędzy obiektami, analiza ruchu obiektów, zdarzeń itp.
+\end{itemize}
+\subparagraph{Operacje punktowe}
+Należą do I grupy metod (obraz w obraz). Przekształcają każdy z pikseli wejściowych $ u(n_1,n2) $ w piksel $ y(n_1,n2) $ według:
+$$ y(n_1,n2) = F[u(n_1,n_2)] $$
+Gdzie $n_1, n_2 $- indeks poszczególnego piksela, np. współrzędne x,y, trzeci parametr ($n_3$) może być kanałem.
+Przykład - dodanie +70 do wartości każdego piksela przyciemni obraz kolorowy jako całość, przy obrazie binarnym zamiana 0 na 1 i odwrotnie - negatyw obrazu.
+Wszystkie piksele obliczane są niezależnie, co pozwala zrównoleglać te algorytmy. Przykłady:
+\begin{itemize}
+	\item dodanie stałej C $ y(n_1,n2) = u(n_1,n_2) + C $
+	\item inwersja obrazu  $ y(n_1,n2) = 255 - u(n_1,n_2) $ (dla 8-bitowego obrazu)
+\end{itemize} 
+Operacje punktowe pozwalają wykorzystywać tablicowanie, (\textit{look-up-table} - LUT), zamiast wyliczać każdy piksel przechowujemy w pamięci zbiór wszystkich wartości, np. 40 zamieniamy na 70, 41 na 71... dzięki czemu wystarczy sprawdzić i wstawić wartość zamiast liczyć.
+
+Wszystkie operacje punktowe można wykonywać z nasyceniem lub bez, dodanie 100 do 200 w 8 bitowej głębi (max 255) może dać czarny (255) przy nasyceniu (operacja nieliniowa!), lub 45 (czyli jasny) przy ,,zawinięciu`` się wartości.
+\subparagraph{Histogramy}
+Wyliczenie histogramu pozwala ,,zobaczyć`` ile pikseli jakiego koloru występuje w obrazie, np. dominują piksele czerwone nad zielonymi, albo jasne nad ciemnymi.
+Pozwala ocenić kontrast - równomierny histogram oznacza wiele detali w obrazie (dużo różnych pikseli), w innym przypadku obraz jest np. niedoświetlony. Histogram pozwala również opisać operacje punktowe. Dodanie stałej to nic innego jak przesunięcie histogramu.
+\subparagraph{Operacje algebraiczne}
+\textbf{Binaryzacja} - progowanie, zmiana obrazu na binarnym, według jakiegoś progu, np u<100 => 0, u>=100 => 1
+\subparagraph{Operacje algebraiczne}
+Operacje punktowe działające na wielu obrazach, przykładowo mając kilka identycznych obrazów, z różnym szumem można je dodać i uśrednić eliminując szum.
+
+\subparagraph{Filtracje}
+Algorytmy usuwające zakłócenia, szumy. Wartość piksela obliczana jest na podstawie jego i otoczenia - o jego wielkości i kształcie decyduje maska, np prostokątna o wymiarach 5x5. Przykładowe filtry:
+
+\begin{itemize}
+	\item uśredniający - najprostszy, liczy średnią wartość pikseli pod maską, rozmywa obraz (ale usuwa szumy)
+	\item Gaussa - rozmywający, ale według rozkładu normalnego. Czyli średnia ważona
+	\item bilateralny - Gaussa z uwzględnieniem różnicy kolorów (jak zupełnie inne piksele to nie uśrednia), usuwa szum, zachowuje krawędzie więc bardzo przydatne przed np. wykrywaniem krawędzi 
+	\item medianowy - filtr nieliniowy, wartość piksela równa jest medianie pikseli pod maską, suwa zakłócenia impulsowe z obrazu (\textit{pieprz i sól}), losowe bardzo jasne/ciemne piksele na obrazie
+\end{itemize}
+
+\subparagraph{Decymacja i interpolacja}
+Zmniejszenie/zwiększenie rozdzielczości obrazu. Interpolację można opisać jako wstawienie zer w miejsca nowych próbek, a następnie wygładzenie obrazu filtrem dolnoprzepustowym.
+
+\subparagraph{Wykrywanie krawędzi}
+Rodzina algorytmów krawędziujących, np. na podstawie gradientu czyli skokowych zmian wartości pikseli. Przydatne przy algorytmach identyfikujących, pozwalają łatwiej ocenić kształt.
+
+\subsection{Inne zastosowania}
+Wszelkie algorytmy identyfikujące, twarz, rękę, samochód. Działają na podstawie wykrycia kształtu i/lub koloru. Okrągłe i cieliste - raczej głowa, kolorowe i kwadratowe - pewnie samochód. (sorki, chyba za późno to piszę).
+\newpage
+\section{Miary i oceny dokładności algorytmów przybliżonych}
+\section{Systemy operacyjne komputerów}
+\section{Zadania optymalizacji i techniki ich rozwiązywania}
+\section{Systemy dynamiczne, opisy własności}
+\section{Programowanie w systemie operacyjnym Unix}
+\section{Komputer, architektura i oprogramowanie}
+
+\part{Zagadnienia kierunkowe}
+\bigskip
+\section{Programowanie strukturalne i obiektowe}
+\subparagraph{Programowanie strukturalne}
+ – jest to „podparadygmat” programowania proceduralnego. Opiera się na tworzeniu programów z kilku dobrze zdefiniowanych funkcji takich jak instrukcja warunkowa if-then-else i pętle, za to bez skoków(go to). Proponowane jest używanie tylko trzech struktur sterujących:
+\begin{itemize}
+\item \textbf{Sekwencja lub konkatencja} – wykonywanie instrukcji w określonej kolejności.
+\item \textbf{Wybór} – wykonywanie jednej z kilu instrukcji zależnie od stanu programu. Przykładem jest if-then-else i switch/case.
+\item \textbf{Iteracja} - przetwarzanie instrukcji tak długo, jak długo spełniony(lub niespełniony) jest dany warunek. Np. while, for.
+Te struktury stosuje się do ,,małych'' bloków programu złożonych z elementarnych instrukcji tj. podstawień, wywołań procedur/funkcji, instrukcji IO itd... Duże bloki powinny być rozbite na mniejsze (funkcje, procedury) tak aby rozumieć poszczególne fragmenty bez rozumienia całości. Podział ten ma również wpływ na jakość kodu, ponieważ procedura/funkcja może być używana wielokrotnie bez niepotrzebnego powielania kodu.
+\end{itemize}
+\medskip 
+
+\subparagraph{Programowanie obiektowe}
+ – W programowaniu obiektowym program to zbiór porozumiewających się ze sobą obiektów, czyli jednostek zawierających określone dane i umiejących wykonywać na nich określone operacje. Najważniejsze są tu dwie cechy: po pierwsze, powiązanie danych (czyli stanu) z operacjami na nich (czyli poleceniami) w całość, stanowiącą odrębną jednostkę — obiekt; Programowanie obiektowe ułatwia, pisanie, konserwację, testowanie i wielokrotne użycie programów lub ich fragmentów.
+\medskip 
+
+Podstawowe założenia paradygmatu obiektowego:
+\begin{itemize}
+\item \textbf{Abstrakcja} – każdy obiekt w systemie służy jako model abstrakcyjnego „wykonawcy” który może wykonywać pracę (metody), opisywać swój stan, zmieniać swój stan oraz komunikować się z innymi obiektami bez ujawniania jego implementacji.
+\item \textbf{Hermetyzacja} – ukrywanie implementacji, enkapsulacja. Zapewnia, że obiekt nie może zmienić statu wewnętrznego innych obiektów w nieoczekiwany sposób. Każdy obiekt prezentuje innym obiektom swój interfejs który określa dopuszczlne metody współpracy.
+\item \textbf{Polimorfizm} – wielopostaciowość, referencje mogą dotyczyć obiektów różnego typu. Wywołanie metody dla referencji spowoduje zachowanie odpowiednie dla typu obiektu danej referencji. Jeśli dzieje się to w trakcie wykonywania programu to nazywa się to wiązaniem dynamicznym.
+\item \textbf{Dziedziczenie} – porządkuje i wspomaga polimorfizm. Umożliwia definiowanie i tworzenia specjalizowanych obiektów na podstawie bardziej ogólnych (od ogółu do szczegółu). Dzięki temu nie powiela się kodu oraz można redefiniować szczególne parametry bez redefiniowania parametrów ogólnych.
+\end{itemize}
+\medskip 
+
+Języki wspierające programowanie obiektowe m.in.: C\#, Java, C++, JavaScript, Objective-C
+\medskip 
+
+Źródło : materiały PW
+
+
+\section{Fala elektromagnetyczna: typy, parametry, właściwości}
+\subparagraph{Pole elektryczne} – każdy ładunek wytwarza w przestrzeni wokół siebie pole elektryczne, siła elektrostatyczna działająca na dowolny ładunek jest wywołana polem elektrycznym, wytworzonym przez inne ładunki w miejscu w którym znajduje się rozważany ładunek.
+
+\subparagraph{Pole magnetyczne} – wytwarzany przez magnes, jest to pole wektorowe tak jak w przypadku pola elektrycznego. W elektromagnesie pole magnetyczne wytwarzane jest za pomocą przepływu prądu przez cewkę nawiniętą na metalowy rdzeń z żelaza. O sile pola decyduje wartość natężenia prądu. Magnesy trwałe zawierają cząstki elementarne (elektrony) które wytwarzają własne pole magnetyczne. W niektórych materiałach pola magnetyczne elektronów sumują się wytwarzając wokół nich wypadkowe pole magnetyczne.
+
+\subparagraph{Fala elektromagnetyczna} – jest to rozchodząca się z prędkością c fala pola elektrycznego i magnetycznego. 
+
+\medskip 
+Cechy:
+\begin{itemize}
+\item Wektory E i B są zawsze prostopadłe do kierunku rozchodzenia się fali. Zatem fale elektromagnetyczna jest falą poprzeczną.
+\item Iloczyn wektorowy W\_E x W\_B zawsze wyznacza kierunek rozchodzenia się fali.
+\item Natężenie pola elektrycznego i indukcja pola magnetycznego zmieniają się zawsze sinusoidalnie. Wektory pól zmieniają się z taką samą częstości a ich oscylacje są zgodne w fazie.
+\end{itemize}
+
+
+
+
+
+\section{Tranzystory bipolarne i unipolarne: budowa, właściwości i zastosowania}
+\section{Systemy ciągłe i dyskretne: klasyfikacja, opis}
+\section{Zmienna losowa: właściwości, opis}
+\section{Ciągła, dyskretna i szybka transformata Fouriera, widmo sygnału}
+Transformata Fouriera jest wynikiem operacji zwanej transformacją Fouriera.
+\subsection{Ciągła transformata Fouriera}
+Jeżeli każdy skończony przedział <a,b> można podzielić na skończoną    liczbę    podprzedziałów,    w    których f(x) jest monotoniczna   oraz   w   każdym   punkcie   przedziału (a,b) są spełnione  warunki  Dirichleta  i  funkcja $f(t)$ jest  całkowalna  w przedziale (-inf, inf), to funkcję:
+\[\hat{f}(\omega)=\int_{-\infty }^{\infty}f(t) e^{-i\omega t}dt .\]
+Transformacja   Fouriera   jest   operacją   odwracalną,   zatem posiadając transformatę $\hat{f}(\omega)$ możemy wyznaczyć jej oryginał:
+\[f(t)= \dfrac{1}{2\pi} \int_{-\infty }^{\infty}\hat{f}(\omega) e^{i\omega t}d\omega .\]
+\subsection{Dyskretna transformata Fouriera}
+Dyskretna transformata Fouriera DFT:
+\[A_{k}=\sum_{n=0}^{N-1}a_{n}w_{N}^{-kn}, ~~~0\le k \le N-1\]
+\[w_{N}=e^{i\dfrac{2\pi}{N}}\]
+Odwrotna DFT:
+\[a_{n}=\dfrac{1}{N}\sum_{k=0}^{N-1}A_{k}w_{N}^{kn}, ~~~0\le n \le N-1\]
+\subsection{Szybka transformata Fouriera}
+Szybka transformacja Fouriera FFT:
+
+\subsection{Widomo sygnału}
+Widmem częstotliwościowym sygnału nazywa się przedstawienie sygnału w dziedzinie częstotliwości lub pulsacji otrzymane w wyniku transformacji Fouriera. Z wykresu widma możliwe jest odczytanie składowych harmonicznych sygnału. Charakterystyka widmowa istnieje tylko wtedy, gdy układ jest BIBO stabilny. Podstawienia  $s = j\omega$ wolno dokonać tylko wtedy, gdy funkcja H(s) nie ma biegunów w prawej domkniętej półpłaszczyźnie zmiennej s.
+\medskip 
+
+$A(\omega)~=~|H(j\omega)|$ - charakterystyka amplitudowa. Określa w jaki sposób modyfikowane jest widmo amplitudowe pobudzenia.
+\medskip 
+
+$\Theta(\omega)~=~argH(j\omega)$ - charakterystyka fazowa. Określa w jaki sposób jest modyfikowane widmo fazowe pobudzenia.
+\section{Modulacje analogowe i cyfrowe}
+\subparagraph{Modulacja} - celowa lub samorzutna zmiana parametrów sygnału.
+\subsection{Modulacje analogowe}
+\subsection{Modulacje cyfrowe}
+\subparagraph{Modulacja cyfrowa} to proces zmiany analogowego sygnału nośnego przez binarny sygnał modulujący, który z łatwością możemy przesłać np. drogą radiową. Sygnałem nośnym w modulacji cyfrowej jak i analogowej jest przebieg sinusoidalny, jednak w modulacjach cyfrowych sygnał modulujący to strumień elementów binarnych. Podobnie jak w modulacjach analogowych tak i w cyfrowych zmianom ulega amplituda, częstotliwość lub faza przebiegu nośnego. Ponieważ cyfrowy sygnał modulujący zmienia się skokowo, to zmiany w przebiegu zmodulowanym również są skokowe. Celem modulacji jest dopasowanie właściwości sygnału wyjściowego zmodulowanego do parametrów kanału transmisyjnego.
+
+\subparagraph{Modulacja ASK} (ang. Amplitude Shift Keying) zwana kluczowaniem amplitudy ma miejsce, gdy występuje zmiana amplitudy sygnału nośnego w zależności od cyfrowego sygnału modulującego. Proces kluczowania amplitudy jest zbliżony do modulacji amplitudy AM, a w zasadzie jest to szczególny rodzaj modulacji AM. Różnica polega na tym, iż sygnał modulujący jest sygnałem cyfrowym. Cechą charakterystyczną kluczowania amplitudy jest to, że dzięki cyfrowemu sygnałowi modulującemu w czasie trwania stanu wysokiego występuje pełna amplituda sygnału zmodulowanego nato-miast w stanie niskim jest ona wytłumiona. Podobnie jak modulacja AM, kluczowanie amplitudy jest liniowe, czułe na zakłócenia atmosferyczne i zniekształcenia [40]. 
+
+\subparagraph{Modulacja FSK}  (ang. Frequency Shift Keying), zwana kluczowaniem częstotliwości, jest szczególnym przypadkiem modulacji częstotliwości FM. Sygnałem modulującym jest sygnał cyfrowy. Modulacja FSK polega na przypisaniu odpowiedniej częstotliwości sygnału nośnego każdemu z dwóch stanów sygnału modulującego. Przejście z jednej częstotliwości może odbywać się z ciągłością fazy lub bez niej. Ta modulacja wyróżnia się stała amplitudą chwilową, niezależną od sygnału modulującego. Ta właściwość jest bardzo przydatna przy transmisji sygnałów przez kanały, gdzie występują zmiany amplitudy transmitowanego sygnału na skutek nieliniowości tego kanału. Zaletą tej modulacji jest również odporność na zakłócenia impulsowe oraz zniekształcenia tłumieniowe i opóźnieniowe. Dlatego też modulacja FSK jest częściej stosowana niż modulacja ASK. 
+
+
+\subparagraph{Modulacja PSK} (ang. Phase Shift Keying) zwana kluczowaniem fazy to jeden z rodzajów modulacji PM. Ma ona miejsce, gdy przy stałej amplitudzie i częstotliwości harmonicznego sygnału nośnego występuje przesunięcie fazy w zależności od stanu informacji pierwotnej. Sygnały przy modulacji PSK są zawsze transmitowane w systemach koherentnych, czyli faza sygnału nadawanego znana jest po stronie odbiorczej. Podobnie jak w przypadku modulacji FSK, modulacja PSK charakteryzuje się stałą w czasie amplitudą chwilową, co odróżnia ją od modulacji ASK, gdzie amplituda chwilowa zmienia się. Powoduje to większe narażenia na zniekształcenia nieliniowe. 
+
+\subparagraph{Modulacja QPSK} (ang. Quadrature Phase Shift Keying) zwana modulacją kwadraturową to jeden z rodzajów modulacji fazy. Może być ona traktowana jako klasyczna modulacja 4 - wartościowa PSK nośnej o amplitudzie A, bądź jako złożenie dwóch dwuwartościowych modulacji amplitudy BASK (ang. Binary Amplitude Shift Keying) o amplitudzie $A/\sqrt{2}$  i ortogonalnych nośnych $\sin 2\pi f_{0}t $  oraz  $\cos 2\pi f_{0}t $. Zastosowano w niej kodowanie na czterech ortogonalnych przesunięciach fazowych sygnału nośnego. Jej zaletą jest zwiększenie efektywności wykorzystania pasma, przy jednoczesnym braku negatywnego wpływu na bitową stopę błędów. Modulację QPSK definiujemy:
+\[x=A\cos(2\pi ft + \Theta), ~~~0<t<T,~~i=1,2,3,4~~oraz~~\Theta = \dfrac{\pi(2i-1)}{4}\]
+Wyjściowe fazy sygnału to Pi/4, 3Pi/4, 5Pi/4, 7Pi/4. Częstotliwość nośnej jest wybierana jako całkowita wielokrotność szybkości nadawania znaku, dlatego faza sygnału jest jedną z wymienionych powyżej faz.
+
+\subparagraph{Modulacja MSK}
+ (ang. Minimum Shift Keying) jest szczególnym przypadkiem modu-lacji FSK, gdy częstotliwości f1 i f2 są równe odpowiednio f0 - 1/(4Tb) i f0 + 1/(4Tb). MSK może być również traktowana jako zmodyfikowana forma modulacji OQPSK (ang. Offset Quadrature Phase Shift Keying), w której elementy odpowiadające składowej synfazowej i kwadraturowej są odpowiednio ukształtowane, a następnie wymnożone przez przebiegi nośne. Przez ukształtowanie rozumiemy zastąpienie impulsu prostokątnego impulsem sinusoidalnym. Modulację MSK definiujemy jako:
+ \[s(t)=s_{I}(t)\cos (2\pi f_{0}t)+s_{Q}(t)\sin (2\pi f_{0}t).\]
+Modulacja MSK zalicza się do klasy modulacji z ciągłą fazą CPM (ang. Continuous Phase Modulation).
+
+%http://atol.am.gdynia.pl/tc/cps2007/cyfrowa.html
+
+Zastosowania:
+\begin{itemize}
+\item transmisja danych birarnych w kanale o wąskim paśmie,
+\item łączność modemowa, faksowa,
+\item łączność radiowa (telemetria, zdalne sterowanie),
+\item systemy bezprzewodowe,
+\item telefonia cyfrowa (GSM, UMTS, TETRA, ...),
+\item łączność satelitarna.
+\end{itemize}
+\section{Wzmacniacze operacyjne: właściwości i zastosowania}
+Materiały: wzmacniacze\_operacyjne.pdf
+\section{Mikroprocesory: budowa, zastosowania}
+\subsection{Architektury}
+\subparagraph{Architektura harwardzka}
+W tej architektura pamięć programu przechowująca rozkazy została oddzielona od pamięci danych (dwie różne magistrale). W trakcie pobierania argumentów wykonywanej właśnie instrukcji można równocześnie zacząć pobieranie następnego słowa rozkazowego (pre-fetch).
+
+\subparagraph{Architektura von Neumanna}
+Architektura zakłada, że podział przestrzeni adresowej na pamięć programu i pamięć danych jest czysto umowny. W ten sposób jest uproszczony dostęp do obu pamięci, gdyż wykonywany jest za pomocą tych samych instrukcji. Główną wadą jest wydłużenie wykonywania cyklu.
+
+\subparagraph{Architektura super-harwardzka}
+Pamięć programu i pamięć danych są oddzielone od siebie, ale wykorzystują one wspólną magistrale: danych i adresową.
+
+\subparagraph{CISC} (ang. Complex Instruction Set Computing) to architektura konwencjonalnych procesorów. Charakteryzuje się ona znaczną liczbą elementarnych rozkazów i trybów adresowania przy niewielkiej liczbie rejestrów uniwersalnych. Jest ona bardzo wolna w porównaniu do RISC-ów. Na tej architekturze były oparte pierwsze procesory z rodziny x86. Dziś w tej rodzinie nie spotka się procesora CISC, ale jest ona zastąpiona przez wewnętrzy RISC. Jednak pozostała zgodnie z zasadą"kompatybilności w tył" mała liczba rejestrów, co jest główną bolączką projektantów procesorów x86.
+
+\subparagraph{RISC} (ang. Reduced Instruction Set Computing/Computer) wywodzi się z Berkeley (1985). Koncepcja tego typu architektury jest oparta na ograniczeniu liczby krótkich (maksymalnie dwusłowowych) rozkazów mających niewiele formatów i trybów adresowania. Procesor RISC posiada wiele rejestrów uniwersalnych (nawet powyżej 100). Działanie procesora przyśpieszają dodatkowe ulepszenia, np. przetwarzanie potokowe, czy pamięć podręczna. Instrukcje wykonująproste operacje, dzięki czemu mogą to robić szybko - każda jednostka wykonawcza jest w stanie wykonać dokładnie jednąinstrukcję w jednym cyklu zegara. Lista instrukcji zawiera tylko kilka rozkazów umożliwiających dostęp do pamięci: załadowanie (load), zapis (store) oraz instrukcje semaforowe. Wszystkie pozostałe rozkazy operują wyłącznie na rejestrach - to również upraszcza budowę układu. Instrukcje kodowane są w prosty sposób - każdy rozkaz ma taką samą długość (np. 32 bity).
+
+\subsection{Budowa}
+Jeśli chodzi o budowę fizyczną, mikroprocesor to nic innego jak krzemowa płytka z milionem tranzystorów, które blokują lub umożliwiają przepływ prądu. Z tranzystorów budowane są bramki logiczne, a te z kolei są łączone w bardziej rozbudowane układy.
+
+\subparagraph{ALU} (ang. Arithmetic Logic Unit) - wykonuje podstawowe operacje arytmetyczne (dodawanie, odejmowanie, dzielenie oraz mnożenie oraz logiczne (OR, AND, XOR, NOT) oraz przesunięcia bitowe. ALU współpracuje z roboczym rejestrem zwanym akumulatorem (lub wieloma akumulatorami), który przechowuje jeden z operandów (argumentów) wykonywanej operacji oraz wyniku tej operacji.
+
+\subparagraph{CU} (ang. Control Unit) - dekoduje zawartość rejestru rozkazów i generuje odpowiednie sygnały sterujące zapewniające prawidłowy przebieg operacji zdefiniowanej kodem rozkazu.
+
+\subparagraph{Rejestry} (ang. Register) - komórki pamięci do przechowywania tymczasowych wyników obliczeń, adresów lokacji w pamięci RAM itp. Rejestry są najszybszym rodzajem pamięci.
+\begin{itemize}
+\item \textbf{Rejestr instrukcji IR} (ang. Instruction Register) - przechowuje aktualnie wykonywaną instrukcję.
+\item\textbf{ Licznik rozkazów PC} (ang. Program Counter) - przechowuje adres w pamięci, gdzie przechowywany jest kolejny rozkaz do pobrania. Rozkazy są przechowywane w postaci kodów binarnych.
+\item Akumulator A (ang. Accumulator) - przechowuje argument (operand) do operacji ALU lub wynik operacji.
+\item Wskaźnik stosu SP (ang. Stack Pointer) - wskazuje na szczyt stosu (adres ostatniej zapełnionej komórki stosu).
+\item Rejestr flagowy - przechowuje informacje dotyczące operacji ALU np. flaga przeniesienia lub pożyczki CF (ang. Carry Flag), flaga parzystości PF (ang. Parity Flag), flaga przepełnienia OF (ang. Overflow Flag) itp.
+\end{itemize}
+
+\subparagraph{Magistrale} (ang. Bus) - wewnętrzne szyny łączące.
+\begin{itemize}
+\item \textbf{szyna danych} (ang. data bus) - magistrala komunikacyjna wykorzystywana d przesyłania właściwych danych,
+\item \textbf{szyna adresowa} (ang. address bus) - łączy CPU z pamięcią. Określa pod jaki adres mają zostać wysłane dane szyną danych. Szerokość magistrali (liczba linii) określa maksymalną pojemność pamięci systemu (przestrzeń adresową)
+\item \textbf{szyna sterująca} (ang. control bus) - zapewnia regulację dostępu do szyny adresowej i szyny danych.
+\end{itemize}
+
+\subsection{Mikroprocesor a mikrokontroler}
+Na system mikroprocesorowy składa się mikroprocesor, układy wejścia/wyjścia,pamięć programu i danych, szyny adresowe, szyny danych ..., system operacyjny. Mikrokontroler to pojedynczy układ scalony zawierający kompletny system, zdolny do samodzielnego wykonywania operacji arytmetycznych i logicznych oraz do sterowania układami i elementami zewnętrznymi. Typowy uC zawiera CPU, pamięć programu (często FLASH), pamięć danych RAM, układu wejścia/wyjścia, wewnętrzne źródło taktowania, interfejsy komunikacyjne oraz inne układy peryferyjne np. kontroler przerwań, timery, ADC, DAC, DMA.
+
+\subsection{Zastosowania}
+\begin{itemize}
+\item elektronika przemysłowa - sterowniki PLC,
+\item elektronika powszechnego użytku - telefony komórkowe, zegarki, komputery
+\item telekomunikacja - routery, switche etc.,
+\item technika samochodowa - piloty, sterowniki świateł, lusterek, radia, kontrolery wtrysku,
+\item medycyna - ciśnieniomierze, EKG, USG, termometry, mierniki poziomu cukru we krwi,
+\item automatyka budynków - sterowniki klimatyzacji i rolet.
+\end{itemize}
+
+\section{Sieci komputerowe: budowa, protokoły, zastosowanie}
+\textbf{Sieć komputerowa} - wzór wzajemnie połączonych komputerów, które mogą pracować samodzielnie i komunikować się z innymi komputerami.
+
+\subsection{Budowa}
+
+Składniki sieci komputerowych:
+\begin{itemize}
+\item \textbf{hosty} - komputery wykorzystywane przez użytkowników,
+\item \textbf{serwery} - stale działające komputery o dużej mocy obliczeniowej świadczące usługi hostom (udostępnianie plików, baz danych itp.),
+\item \textbf{medium transmisyjne} - nośnik informacji (kable miedziane, światłowody lub fale radiowe),
+\item \textbf{sprzęt sieciowy} - koncentratory, przełączniki, rutery, karty sieciowe, modemy, punkty dostępu,
+\item \textbf{oprogramowanie} - programy komputerowe zainstalowane na urządzeniach sieciowych.
+\end{itemize}
+
+\medskip
+\textbf{Model odniesienia OSI} (ang. Open System Interconnection) - 
+\begin{itemize}
+\item \textbf{warstwa aplikacji} - określa w jaki sposób aplikacje działają ze sobą,
+\item \textbf{warstwa prezentacji} - dodaje podstawowe formatowanie do prezentacji danych,
+\item \textbf{warstwa sesji} - zarządza przebiegiem komunikacji pomiędzy dwoma komputerami,
+\item \textbf{warstwa transportowa} - sprawdza poprawność wysyłanych danych,
+\item \textbf{warstwa sieci} - adresuje wiadomości wewnątrz i pomiędzy sieciami,
+\item \textbf{warstwa łącza danych} - określa sposób uzyskiwania dostępu do fizycznego medium,
+\item \textbf{warstwa fizyczna} - przesyła dane przez fizyczne medium.
+\end{itemize}
+
+\subsection{Protokoły}
+
+\textbf{Protokół komunikacyjny} - zbiór reguł i kroków postępowania, które są wykonywane podczas komunikacji co najmniej dwóch urządzeń ze sobą.
+\medskip 
+
+
+\subsubsection{Protokoły warstwy aplikacji}
+
+\medskip 
+\subparagraph{FTP} (ang. File Transfer Protocol) umożliwia dwukierunkowe przesyłanie plików binarnych i tekstowych, korzysta przy tym z protokołu TCP. FTP działa w oparciu o zasadę klient-serwer i korzystanie z usługi polega na użyciu interaktywnej aplikacji. Technologia FTP zapewnia ochronę stosując hasła dostępu.
+
+\subparagraph{HTTP} (ang. Hypertext Transfer Protocol) odpowiada  za  przesyłanie  dokumentów  hipertekstowych  w  sieci  WWW,  która  jest najszybciej rozwijającą się i najczęściej używaną częścią internetu. Przy jego pomocy przebiega komunikacja między klientami i serwerami sieci Web.
+
+\subparagraph{HTTPS} (ang. HyperText Transfer Protocol Secure) to szyfrowana wersja protokołu HTTP. Zamiast używać w komunikacji klient-serwer niezaszyfrowanego tekstu, szyfruje go za pomocą protokołu SSL. Zapobiega to przechwytywaniu i zmienianiu przesyłanych danych.
+HTTPS działa domyślnie na porcie nr 443 w protokole TCP.
+
+\subparagraph{DNS} (ang. Transmission   Control   Protocol) jest systemem tłumaczenia internetowych nazw domenowych na adresy IP. 
+System  DNS  jest  rozproszoną  bazą  danych obsługiwaną przez wiele serwerów, z których każdy posiada tylko informacje o domenie, którą zarządza, oraz o adresie serwera nadrzędnego. Na najwyższym poziomie znajdują się tzw. główne serwery nazw(root  level  servers),  które  znajdują  się  w  Stanach  Zjednoczonych  i  podłączone  są  do  szybkich  sieci szkieletowych Internetu. Przechowują one adresy serwerów nazw dla domen najwyższego poziomu, np. .com, .edu, .org, oraz domen krajowych, np. .pl, .de, .uk. Adresy serwerów głównych muszą być znane każdemu  innemu  serwerowi  nazw.  Wewnątrz  każdej  domeny  można  tworzyć  tzw.  subdomeny,  np. wewnątrz domeny .pl utworzono wiele domen regionalnych jak .waw.pl, .lodz.pl itp, oraz funkcjonalnych jak .com.pl, .gov.pl lub .org.pl, należących do firm, organizacji lub osób prywatnych. 
+
+\subparagraph{SMTP} (ang. Simple Mail Transfer Protocol) odpowiada za przesyłanie poczty elektronicznej pomiędzy komputerami pracującymi w sieci.
+
+\subparagraph{POP3} (ang. Post Office Protocol v 3) pozwalający na odbiór poczty elektronicznej ze zdalnego serwera do lokalnego komputera poprzez połączenie TCP/IP. 
+
+\subparagraph{TELNET} (ang. Terminal emulation) - umożliwia użytkownikowi zdalny dostęp do innego komputera: zalogowanie sięw hoście internetowym i wykonywanie poleceń. Wysyłane dane nie są szyfrowane. Aktualnie częściej wykorzystywany jest protokół SSH (ang. Secure SHell) z szyfrowaniem danych.
+
+
+
+\subsubsection{Protokoły warstwy transportowej}
+
+\medskip 
+\subparagraph{TCP} (ang. Transmission   Control   Protocol)   działa   w   warstwie transportowej   w   \emph{trybie połączeniowym}.  Gwarantuje dostarczenie danych do odbiorcy.  Połączenia  TCP  są  połączeniami  wirtualnymi,  rozpoznawanymi  po  adresach  i portach urządzeń  docelowych  i źródłowych.  Połączenia  takie  charakteryzują  się  możliwościami  sterowania przepływem,    potwierdzaniem    odbioru,    zachowywaniem    kolejności    danych,    kontrolą    błędów    i przeprowadzaniem  retransmisji. Odbiorca po odebraniu danych zobowiązany jest do przesłania do nadawcy potwierdzenia odebrania danych. Jeżeli potwierdzenie nie nadejdzie w określonym czasie, to nadawca wysyła dane ponownie.  Segmenty  TCP  składają  się  z  nagłówka  i  danych.
+
+\subparagraph{UDP} (ang. User   Datagram   Protocol)   działa    w    warstwie    transportowej   w   \emph{trybie bezpołączeniowym}.  Protokół  ten  nie  gwarantuje  dostarczenia  danych  do  odbiorcy.  Jeżeli  pakiet  nie dotrze  do  odbiorcy,  lub  dotrze  uszkodzony,  UDP  nie podejmie żadnych  działań  zmierzających  do retransmisji  danych,  a  zapewnienie  niezawodności  pozostawi  warstwie  wyższej.   Protokół wykorzystywany jest do szybkiego przesyłania danych w niezawodnych sieciach. 
+
+
+%\chapter{}
+
+
+
+\subsubsection{Protokoły warstwy sieci}
+
+\medskip 
+\subparagraph{IP} (ang. Internet Protocol) zapewnia usługę dostarczania pakietów danych z jednego punktu sieci do drugiego. Nie analizuje zawartości pakietu, ale wyszukuje ścieżkę prowadzącą do jego miejsca przeznaczenia. Protokół ten wykorzystuje adresy sieciowe komputerów zwane adresami IP. Są to 32-bitowa liczby zapisywana jako sekwencje czterech ośmiobitowych liczb dziesiętnych (mogących przybierać wartość od 0 do 255), oddzielonych od siebie kropkami. Adres IP dzieli się na dwie części: identyfikator sieciowy (network id) i identyfikator komputera (host id). Istnieje kilka klas adresowych, o różnych długościach obydwu składników. Obowiązujący obecnie sposób adresowania ogranicza liczbę dostępnych adresów, co przy bardzo szybkim rozwoju Internetu jest dla niego istotnym zagrożeniem. W celu ułatwienia zapamiętania adresów wprowadzono nazwy symboliczne, które tłumaczone są na adresy liczbowe przez specjalne komputery w sieci, zwane serwerami DNS.
+
+\subparagraph{ARP} (ang. Address Resolution Protocol) odpytuje wszystkie komputery w sieci, czy maja potrzebny mu adres IP i prosi o przesłanie odpowiadającego mu adresu fizycznego MAC. Aby ograniczyć ruch w sieci budowana jest dynamiczna tablica ARP, w której zapisywane są pary adres IP adres MAC komputerów z którymi został nawiązany kontakt. Tablica ta ma ograniczony rozmiar. Jeśli tablica ARP przepełni się, to jest z niej usuwany najstarszy wpis.
+
+\subsection{Zastosowania}
+\medskip 
+\begin{itemize}
+\item współdzielenie zasobów np. plików, drukarek,
+\item komunikacja np. poczta e-mail, telefonia,
+\item sieci przemysłowe,
+\item bezprzewodowe sieci czujników,
+%\item 
+\end{itemize}
+
+\end{document}
