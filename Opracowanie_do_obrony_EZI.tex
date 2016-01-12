@@ -17,7 +17,7 @@
 \selectlanguage{polish}
 \usepackage{amsmath}
 \usepackage{amsfonts}
-\renewcommand*\thesection{\arabic{section}} % zmiana numeracji sekcji 0.X -> X
+
 \author{\textbf{KN EZI Team}}
 \title{Opracowanie pytań do obrony (EZI)}
 \frenchspacing
@@ -190,9 +190,16 @@ Sieci lokalne mogą korzystać z technologii transmisji opartej na kablu, do kt�
 W rozgłoszeniowych sieciach LAN możliwe są różnorodne topologie. Przykładem jest sieć magistralowa (zbudowana z kabla liniowego). W sieci magistralowej, w każdej chwili najwyżej jedno urządzenie jest nadrzędne i ma prawo do nadawania. Potrzebny jest zatem mechanizm arbitrażu który rozstrzyga konflikt tgdy dwa lub więcej urządzeń chce nadawać jednocześnie. Mechanizm arbitrażu może być scentralizowany lub rozproszony. Na przykład sieć Ethernet jest siecią rozgłoszeniową opartą na magistrali ze zdecentralizowanym sterowaniem. Komputery w tej sieci mogą nadawać w dowolnej chwili; w razie kolizji dwóch lub więcej pakietów każdy komputer oczekuje losowy odstęp czasu i ponawia próbę. Drugim typem systemu rozgłoszeniowego jest pierścień. W pierścieniu każdy bit propaguje się samodzielnie bez czekania na resztę pakietu,do którego należy. Zazwyczaj każdy bit okrąża cały pierścień w czasie potrzebnym na transmisję kilku bitów, często zanim komplety pakiet zostanie wysłany.
 \chapter{Bazy danych i ich zastosowania}
 
-\paragraph{Baza danych} jest narzędziem służącym do zbierania i organizowania informacji. Bazy danych pozwalają przechowywać dowolne informacje, na przykład informacje o ludziach, produktach czy zamówieniach. Często początkową formą bazy danych jest lista w edytorze tekstu lub arkusz kalkulacyjny. Gdy ilość danych rośnie, powstają nadmiarowe i niespójne dane. Dlatego wprowadza się różne systemy bazodanowe umożliwiające łatwiejsze zarządzanie dużą ilością danych. Baza danych umożliwia przechowywanie obiektów wiążących wiele informacji. Dane zapisywane są w rekordach które tworzą tabele.
-
+\paragraph{Baza danych} zbiór danych zapisanych zgodnie z określonymi regułami. W węższym znaczeniu jest to program (system) służący do zbierania, przetwarzania i organizowania informacji. 
+Bazy danych pozwalają przechowywać dowolne informacje, na przykład informacje o ludziach, produktach czy zamówieniach. Dla systemów komputerowych mogą to być dane numeryczne, tekstowe, binarne, daty, lub inne dostępne typy w danym systemie. Można więc przechowywać grafikę, muzykę - np. jako pliki binarne. Kartoteka w bibliotece to również baza danych.
+ Za bazę danych uważany może być plik tekstowy, arkusz kalkulacyjny, plik binarny. Gdy ilość danych rośnie, powstają nadmiarowe i niespójne dane. Dlatego wprowadza się różne systemy bazodanowe umożliwiające łatwiejsze zarządzanie dużą ilością danych - np. MS SQL, MySQL, Access.
+ 
+Z uwagi na cenę danych współczesne systemy bazodanowe stanowią  podstawą działalności wielu firm, co wymaga istnienia możliwie niezawodnych systemów baz danych. \\
+\textbf{System zarządzania bazą danych} - oprogramowanie umożliwiające tworzenie oraz eksploatację bazy danych oraz jej użytkowników. \\
+\textbf{baza danych} = dane + schemat bazy danych (np. relacyjny) \\
+\textbf{system bazy danych} = baza danych + system zarządzania bazą
 \medskip 
+
 
 \paragraph{Kryteria klasyfikacji baz danych}
 
@@ -207,17 +214,47 @@ W rozgłoszeniowych sieciach LAN możliwe są różnorodne topologie. Przykłade
 Bazy danych można podzielić według struktur organizacji danych, których używają:
 
 \begin{itemize}
-\item Bazy proste: kartotekowe, hierarchiczne
-\item Bazy złożone: relacyjne, obiektowe, relacyjno-obiektowe, strumieniowe, temporalne, nierelacyjne (NoSQL)
+\item Bazy proste: kartotekowe, hierarchiczne (struktura drzewa, np katalogi w systemie)
+\item Bazy złożone: relacyjne, obiektowe, relacyjno-obiektowe, strumieniowe, temporalne, nierelacyjne (NoSQL), grafowe
 \end{itemize}
 
 Z wymienionych struktur, w praktyce zdecydowanie najczęściej używane są bazy relacyjne.
 \medskip
 
 
-\paragraph{Bazy relacyjne}
+\section{Bazy relacyjne}
+Relacyjny model danych został zaproponowany w latach 70. Zaimplementowany w latach 80. 
 
-W bazach relacyjnych wiele tablic danych może współpracować ze sobą (są między sobą powiązane). Bazy relacyjne posiadają wewnętrzne języki programowania, wykorzystujące zwykle SQL do operowania na danych, za pomocą których tworzone są zaawansowane funkcje obsługi danych. Relacyjne bazy danych (jak również przeznaczony dla nich standard SQL) oparte są na kilku prostych zasadach:
+Opiera się on (suprise) na pojęciu relacji. Dane grupowane są w relacje reprezentowane przez tablice. Czyli tablica STUDENCI zawierająca wiersze (krotki) z danymi studentów (imię, indeks - kolumny), o odpowiednich typach - całość tworzy relację.
+W modelu obiektowym relacji odpowiada obiekt. \\
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.7]{obrazy/bazy/Relational_model_concepts_PL.png}
+	\caption{Relacja}
+\end{figure}
+\paragraph{Pojęcia}
+\begin{itemize}
+	\item klucz podstawowy (główny) - najkrótszy zbiór atrybutów (czyli kolumn) pozwalający na \textbf{jednoznaczną} identyfikację wiersza w tabeli. Max 1 na tabelę
+	\item klucz obcy - kolumna zawierająca wartości wskazujące na \textit{klucz główny} w innej tabeli, pozwala stworzyć związek pomiędzy tabelami. Typy związków: jeden do jednego, jeden do wielu, wiele do wielu (najczęściej realizowane za pomocą tabeli pośredniej)
+\end{itemize}
+Związki pomiędzy relacjami pozwalają uniknąć nadmiarowości danych i pozwalają zapewnić ich spójność. Jeżeli np. mamy tabelę studenci i samochody, relacja wiele do jednego (każdy samochód posiada klucz obcy czyli np. indeks studenta). Jeden student może posaiadać więc wiele samochodów. Jeżeli chcemy sprawdzić czyj jest dany samochód to mamy klucz obcy studenta, a nie jesgo wszystkie dane - czyli wystarczy raz wpisać studenta, a zmiana jego danych następuje tez w jednym miejscu. Czyli minimalna ilośc danych zapewnia spójność. Zły przypadek - tabela samochody zawiera wszystkie dane studenta, on zmienia imię, trzeba aktualizować dane we wszystkich jego samochodach (i pewnie o którymś się zapomni).\\
+Zasady projektowania schematów relacyjnych baz danych opisują \textbf{zasady normalne}, najważniejsze:
+\begin{itemize}
+	\item 1NF atrybuty są atomowe (niepodzielne) - kolumna [imię,nazwisko] - należy rodzielić na 2 osobne kolumny, jedna komórka zawiera jedną wartość, czyli nie chcemy kolumny imiona
+		\item 2NF   każda kolumna niekluczowa zależy funkcyjnie od całego klucza głównego  (i tak nikt o to nie zapyta ani nikt nie wykuje, ale wstawiam)
+	\item 3NF każda komórka w wierszu zależy jedynie od klucza głównego, \\
+	\lbrack indeks\rbrack, \lbrack imię\rbrack], \lbrack płeć\rbrack  \\
+	Zakładając że indeks to klucz główny, a płeć jest jednak związana z imieniem to ta ka tabela nie spełni tego wymagania, należy wydzielić drugą tabelę imiona: [imię], [płeć] a studentowi zostawić indeks i klucz obcy do tabeli imiona
+\end{itemize} .
+
+Do pracy z relacyjnymi bazami danych służy SQL - standardowy język zapytań, używany do tworzenia, modyfikowania baz danych oraz do umieszczania i pobierania danych z baz danych.
+Konkretnie: selekcje, projekcje, złączanie, usuwanie, modyfikację dodawania danych, a także operacje na schematach bazy danych - tworzenie, modyfikowanie tabel. \\
+Zawiera on typy danych, umożliwia tworzenie funkcji, procedur składowanych.
+
+
+\section{Z wikipedii (takie powtórzenie)}
+Relacyjne bazy danych (jak również przeznaczony dla nich standard SQL) oparte są na kilku prostych zasadach:
 
 \begin{enumerate}
 \item Wszystkie wartości danych oparte są na prostych typach danych.
@@ -301,7 +338,7 @@ Zawiera dane załadowane z dysku, okresowo zapisane (Dirty blocks), przechowuje 
 \end{itemize}
 
 \chapter{Przetwarzanie obrazów, metody i zastosowania}
-\subparagraph{Reprezentacja obrazu}
+\paragraph{Reprezentacja obrazu}
 Obraz cyfrowy powstaje poprzez kwantyzację i próbkowanie obrazu analogowego. Wynikiem jest uporządkowana siatka kwadratów, z których każdy zawiera informację o obrazie wejściowym jak np. średnia jasność w obszarze. Każdy z kwadratów siatki zwany jest pikselem, a ich liczba i wielkość są podstawowymi wartościami opisującymi matryce służące do akwizycji obrazu jak CCD lub CMOS.
 
 Rozróżniamy obrazy jednobarwne - \textit{monochromatyczne}, binarne, barwne.
@@ -311,8 +348,7 @@ typowa kamerka internetowa - ramka obrazu składa się z trzech kanałów - obra
 Zapewnia to 24-bitową głębie kolorów (3 kanały po 8 bitów), tzn. pozwala reprezentować $2^{24}$  kolorów. Tryb ten nazywany jest \textit{true color}. 
 4 kanałem często używanym np. w formacie png może być kanał A \textit{Alpha} odpowiadający za (nie)-przeźroczystość.
 
-\subsection{Algorytmy przetwarzania obrazów}
-\paragraph{Ogólnie\\\\}
+\section{Algorytmy przetwarzania obrazów}
 Pojęcie \textbf{przetwarzania obrazów} można rozumieć rozmaicie. W wąskim sensie oznacza operacje, które przetwarzają jedne obrazy w inne - zarówno dane wejściowe jak i wyjściowe mają formę obrazu. W tym sensie zawierają się:
 \begin{itemize}
 	\item akwizycja obrazów - wprowadzenie obrazów, zwłaszcza cyfrowych do systemów technicznych (sorki, brzydka definicja),
@@ -336,7 +372,7 @@ Pojęcie \textbf{przetwarzania obrazów} można rozumieć rozmaicie. W wąskim s
 	\item analiza tekstur - wydzielenie np. drewna, tkaniny i analiza cech
 	\item analiza sceny i zdarzeń - określanie zależności przestrzennych i czasowych pomiędzy obiektami, analiza ruchu obiektów, zdarzeń itp.
 \end{itemize}
-\paragraph{Operacje punktowe\\\\}
+\subsection{Operacje punktowe}
 Należą do I grupy metod (obraz w obraz). Przekształcają każdy z pikseli wejściowych $ u(n_1,n2) $ w piksel $ y(n_1,n2) $ według:
 $$ y(n_1,n2) = F[u(n_1,n_2)] $$
 Gdzie $n_1, n_2 $- indeks poszczególnego piksela, np. współrzędne x,y, trzeci parametr ($n_3$) może być kanałem.
@@ -349,15 +385,15 @@ Wszystkie piksele obliczane są niezależnie, co pozwala zrównoleglać te algor
 Operacje punktowe pozwalają wykorzystywać tablicowanie, (\textit{look-up-table} - LUT), zamiast wyliczać każdy piksel przechowujemy w pamięci zbiór wszystkich wartości, np. 40 zamieniamy na 70, 41 na 71... dzięki czemu wystarczy sprawdzić i wstawić wartość zamiast liczyć.
 
 Wszystkie operacje punktowe można wykonywać z nasyceniem lub bez, dodanie 100 do 200 w 8 bitowej głębi (max 255) może dać czarny (255) przy nasyceniu (operacja nieliniowa!), lub 45 (czyli jasny) przy ,,zawinięciu`` się wartości.
-\paragraph{Histogramy\\\\}
+\subsection{Histogramy}
 Wyliczenie histogramu pozwala ,,zobaczyć`` ile pikseli jakiego koloru występuje w obrazie, np. dominują piksele czerwone nad zielonymi, albo jasne nad ciemnymi.
 Pozwala ocenić kontrast - równomierny histogram oznacza wiele detali w obrazie (dużo różnych pikseli), w innym przypadku obraz jest np. niedoświetlony. Histogram pozwala również opisać operacje punktowe. Dodanie stałej to nic innego jak przesunięcie histogramu.
-\paragraph{Operacje algebraiczne\\\\}
+\subsection{Operacje algebraiczne}
 Operacje punktowe działające na wielu obrazach, przykładowo mając kilka identycznych obrazów, z różnym szumem można je dodać i uśrednić eliminując szum.
-\subparagraph{Binaryzacja} - progowanie, zmiana obrazu na binarnym, według jakiegoś progu, np. $u<100 \ge 0$, $u \ge 100 \ge 1$.
+\subsection{Binaryzacja} - progowanie, zmiana obrazu na binarnym, według jakiegoś progu, np. $u<100 \ge 0$, $u \ge 100 \ge 1$.
 
 
-\paragraph{Filtracje\\\\}
+\subsection{Filtracje}
 Algorytmy usuwające zakłócenia, szumy. Wartość piksela obliczana jest na podstawie jego i otoczenia - o jego wielkości i kształcie decyduje maska, np prostokątna o wymiarach 5x5. Przykładowe filtry:
 
 \begin{itemize}
@@ -367,13 +403,13 @@ Algorytmy usuwające zakłócenia, szumy. Wartość piksela obliczana jest na po
 	\item \textbf{medianowy} - filtr nieliniowy, wartość piksela równa jest medianie pikseli pod maską, suwa zakłócenia impulsowe z obrazu (\textit{pieprz i sól}), losowe bardzo jasne/ciemne piksele na obrazie
 \end{itemize}
 
-\paragraph{Decymacja i interpolacja\\\\}
+\subsection{Decymacja i interpolacja\\\\}
 Zmniejszenie/zwiększenie rozdzielczości obrazu. Interpolację można opisać jako wstawienie zer w miejsca nowych próbek, a następnie wygładzenie obrazu filtrem dolnoprzepustowym.
 
-\paragraph{Wykrywanie krawędzi\\\\}
+\subsection{Wykrywanie krawędzi\\\\}
 Rodzina algorytmów krawędziujących, np. na podstawie gradientu czyli skokowych zmian wartości pikseli. Przydatne przy algorytmach identyfikujących, pozwalają łatwiej ocenić kształt.
 
-\subsection{Inne zastosowania}
+\section{Inne zastosowania}
 Wszelkie algorytmy identyfikujące, twarz, rękę, samochód. Działają na podstawie wykrycia kształtu i/lub koloru. Okrągłe i cieliste - raczej głowa, kolorowe i kwadratowe - pewnie samochód. (sorki, chyba za późno to piszę).
 
 
