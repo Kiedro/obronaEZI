@@ -1138,7 +1138,105 @@ W zakresie nasycenia napięcie $U_{DS}$ bardzo nieznacznie wpływa na prąd dren
 
 
 
-\section{Systemy ciągłe i dyskretne: klasyfikacja, opis}
+\chapter{Systemy ciągłe i dyskretne: klasyfikacja, opis}
+
+\paragraph{System} można rozumieć jako pewien  blok, który odpowiada na zadany sygnał wejściowy (pobudzenie) jednym lub więcej sygnałami wyjściowym.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{obrazy/ciagle_dyskretne.png}
+\end{figure}
+
+\paragraph{Systemy ciągłe} wszystkie sygnały (wejściowe i wyjściowe) są funkcjami ciągłymi w dziedzinie x (np. czasie) i mogą przybierać dowolną wartość z obszaru swojej zmienności. Układy te opisuje się zwykle równaniami różniczkowymi. 
+
+\paragraph{Systemy dyskretne} - układ jest dyskretny, jeżeli przynajmniej jeden jego sygnał ma charakter dyskretny, tzn. przyjmuje tylko określone wartości dla określonych argumentów. Układy takie opisuje się zwykle równaniami różnicowymi. 
+
+W systemie dyskretnym, przetwarzanie
+obejmuje operacje arytmetyczne 
+przeprowadzane na sygnale wejściowym 
+x[n], w wyniku, których na wyjściu systemu otrzymuje się sygnał wyjściowy y[n] w postaci ciągu liczb. W większości przypadków systemy czasu dyskretnego są systemami o jednym wejściu i jednym wyjściu.
+
+Systemy można klasyfikować ze względu na następujące własności:
+\begin{itemize}
+\item \textbf{Liniowość} - spełnia zasadę superpozycji tj. odpowiedź systemu liniowego na sumę sygnałów wejściowych jest równa sumie odpowiedzi systemu na poszczególne sygnały składowe.
+\item \textbf{Przyczynowość} - wyjścia zależą od wejść bieżących i przeszłych, ale nie od wejść przyszłych. Układ taki nie wykazuje reakcji, nim nie nastąpi jego pobudzenie. 
+\item \textbf{Stacjonarność} - jeżeli dowolne przesunięcie czasu q dla sygnału wejścia u(t+q) powoduje takie samo przesuniecie dla sygnału wyjścia y(t+q).
+\end{itemize}
+
+\paragraph{Właściwości systemów}
+\begin{itemize}
+\item Addytywność
+\[f(x_1(t)+x_2(t))=f(x_1(t))+f(x_2(t))\]
+\[f(x_1(n)+x_2(n))=f(x_1(n))+f(x_2(n))\]
+\item Jednorodność
+\[f(kx(t))=kf(x(t))\]
+\[f(kx(n))=kf(x(n))\]
+\item Liniowość
+\[f(k_1x_1(t)+k_2x_2(t))=k_1f_1(x_1(t))+k_2f_2(x_2(t))\]
+\[f(k_1x_1(n)+k_2x_2(n))=k_1f_1(x_1(n))+k_2f_2(x_2(n))\]
+\end{itemize}
+
+\subsection{Sygnały}
+\paragraph{Sygnał}proces zmian pewnej wielkości fizycznej lub stanu obiektu fizycznego w czasie lub w przestrzeni. Sygnał generalnie przekazuje jakąś informację (tj. jest nośnikiem informacji). Sygnał może być również syntetyzowany do celów komunikacji. 
+
+\subparagraph{Klasyfikacja ze względu na:}
+\begin{itemize}
+\item \textbf{Dziedzinę} - sygnały ciągłe (określone dla wszystkich $x\in [a,b]$) i dyskretne określone dla wybranych punktów . Poza tymi punktami sygnały są nieokreślone. 
+\item \textbf{Przeciwdziedzinę} (zbiór wartości funkcji) Zbiór ten może być ciągły(sygnał ciągły w amplitudzie) lub dyskretny (albo skończony gdy liczba wartości przyjmowanych przez funkcję jest równa N).  
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.6]{obrazy/wykresy_sygnaly.png}
+\caption{Wykresy sygnałów}
+\end{figure}
+
+Sygnał dyskretny w  czasie powstaje w wyniku próbkowania sygnałów ciągłych z określonym krokiem próbkowania.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.9]{obrazy/podstawowe_sygnaly.png}
+\end{figure}
+
+\subsection{Dodatek}
+Tematyka systemów jest bardzo rozbudowana - stąd dodatek.
+
+Systemy mogą również być:
+\begin{itemize}
+\item \textbf{Dynamiczne}
+system dynamiczny to taki, w którym zmiana w jednej części wpływa na pozostałe; największy dynamiczny system fizyczny to Wszechświat.
+\item \textbf{Statyczne}
+system statyczny jest niezmienny w czasie, może być abstrakcyjny lub fizyczny,
+\end{itemize}
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.8]{obrazy/slajd.png}
+\end{figure}
+
+\paragraph{Systemy nieprzyczynowe} - zwane wyprzedzającymi, to takie, w których wartość sygnału wyjściowego w badanej chwili zależy także od przyszłych wartości sygnału na wejściu. Przykładami takich systemów są:
+\begin{itemize}
+\item systemy, w których zmienną niezależną nie jest czas (np. systemy cyfrowego przetwarzanie obrazów),
+\item systemy w których uśredniamy dane zebrane w pewnym okresie czasu (ceny akcji na giełdzie, dane demograficzne, sygnały meteorologiczne), i w których interesuje nas określenie wolnozmiennych trendów w danych, zawierających także szybkozmienne (często przypadkowe) fluktuacje.
+\end{itemize}
+
+
+\paragraph{System jest odwracalny}, jeżeli jest możliwe znalezienie takiego systemu, który włączony z nim kaskadowo da na wyjściu sygnał wejściowy.
+
+\paragraph{Rozszerzone definicje}
+\begin{itemize}
+\item \textbf{Sygnał ciągły} – wartości f(x) sygnału są istotne dla każdego argumentu x z pewnego przedziału, np. dla każdej chwili czasu t 
+\item \textbf{Sygnał dyskretny} – określony dla dyskretnych wartości argumentu x – gdzie znana jest wartość ilości argumentów x 
+\item \textbf{Sygnał analogowy} – jest przebiegiem konkretnej wielkości fizycznej, np. napięcia, natężenie prądu, ciśnienia, temperatury etc. dla konkretnej lub nieskończonej dziedziny argumentu x (np. w czasie). 
+\item \textbf{Sygnał cyfrowy} – sygnał określony dla dyskretnych wartości x i f(x). Znaczenie tego terminu może odnosić się do: 
+\begin{itemize}
+\item wielkości fizycznej, która z natury jest dyskretna (np. liczba błysków lampy w ciągu godziny) 
+\item wielkości pierwotnie ciągłej i analogowej, która została spróbkowana i skwantowana (np. sygnał na wyjściu komparatora napięcia kontrolującego pewien proces w określonych chwilach) 
+\item każdej reprezentacji jednego z powyższych, w tym (najczęściej) w postaci ciągu liczb zapisanych w pamięci maszyny cyfrowej (np. plik komputerowy typu WAV). 
+\end{itemize}
+\end{itemize}
+
 \section{Zmienna losowa: właściwości, opis}
 
 \subsection{Zmienne losowe}
@@ -1241,47 +1339,79 @@ V(x) = E[X - E(X)]^2 = E(X^2)-E(X)^2
 
 
 \section{Ciągła, dyskretna i szybka transformata Fouriera, widmo sygnału}
-Transformata Fouriera jest wynikiem operacji zwanej transformacją Fouriera.
+\paragraph{Ogólnie}
+ W dziedzinie przetwarzania sygnałów \textbf{transformacja} Fouriera używana jest do przetworzenia funkcji x(t) ciągłej lub dyskretnej w dziedzinie czasu na funkcję X(s) ciągłą lub dyskretną w dziedzinie częstotliwości. Ocena wyrażenia X(s) pozwala określić zawartość częstotliwościową dowolnego sygnału. 
+
 \subsection{Ciągła transformata Fouriera}
-Jeżeli każdy skończony przedział <a,b> można podzielić na skończoną    liczbę    podprzedziałów,    w    których f(x) jest monotoniczna   oraz   w   każdym   punkcie   przedziału (a,b) są spełnione  warunki  Dirichleta  i  funkcja $f(t)$ jest  całkowalna  w przedziale (-inf, inf), to funkcję:
+\paragraph{Transformata Fouriera}
+ - wynik operatora liniowego (czyli jednorodny [$ cf(x) = f(cx) $] i addytywny [$ f(a+b)=f(a)+f(b) $] ) jakim jest \textbf{transformacja} Fouriera. Dzięki liniowości możemy transformować sygnały rzeczywiste, w innym przypadku byłyby to jedynie sygnały zawierające pojedynczy przebieg sinusoidalny.
 
-\begin{equation}
-\hat{f}(\omega)=\int_{-\infty }^{\infty}f(t) e^{-i\omega t}dt .
-\end{equation}
+Dla funkcji f(x) transformatę Fouriera definiujemy następująco:
+$$ F(s) = \int\limits_{-\infty}^{+\infty} f(x)\ e^{- 2\pi i x s}\,dx, $$
 
-Transformacja   Fouriera   jest   operacją   odwracalną,   zatem posiadając transformatę $\hat{f}(\omega)$ możemy wyznaczyć jej oryginał:
+a transformację odwrotną
 
-\begin{equation}
-f(t)= \dfrac{1}{2\pi} \int_{-\infty }^{\infty}\hat{f}(\omega) e^{i\omega t}d\omega .
-\end{equation}
+$$ f(x) = \int\limits_{-\infty}^{+\infty} F(s)\ e^{2\pi i x s}\,ds, $$
 
-\subsection{Dyskretna transformata Fouriera}
-Dyskretna transformata Fouriera DFT:
+\subsection{Dyskretna transformata Fouriera (DFT)}
+W praktyce pomiary pozwalają otrzymać dane o charakterze dyskretnym, stąd też zdefiniowana jest dyskretna transformata Fouriera (dyskretne przekształcenie Fouriera, DFT), używana w cyfrowym przetwarzaniu sygnałów:
 
-\begin{equation}
-A_{k}=\sum_{n=0}^{N-1}a_{n}w_{N}^{-kn}, ~~~0\le k \le N-1
-\end{equation}
-\begin{equation}
-w_{N}=e^{i\dfrac{2\pi}{N}}
-\end{equation}
+$$ X(m)= \sum_{n=0}^{N-1}{x(n) e^{- \frac{2 \pi i n m}{N}}} , \ 0 \le k \le N-1 $$
+gdzie x(n) to dyskretny ciąg wartości ciągłej zmiennej x(t), spróbkowanej w dziedzinie czasu, 
 
-Odwrotna DFT:
-\begin{equation}
-a_{n}=\dfrac{1}{N}\sum_{k=0}^{N-1}A_{k}w_{N}^{kn}, ~~~0\le n \le N-1
-\end{equation}
+N – liczba próbek wejściowych w dziedzinie czasu. \\
+ DFT wyznacza zawartość widmową sygnału wejściowego w N równomiernie rozłożonych punktach na osi częstotliwości. N określa ile próbek wejściowych jest wymaganych do policzenia DFT, jaka jest rozdzielczość wyników w dziedzinie częstotliwości (odległość pomiędzy prążkami w Hz) oraz jaki jest czas przetwarzania wymagany do obliczenia N-punktowej DFT. Ze wzoru na DFT wynika bowiem, iż złożoność obliczeniowa algorytmu wynosi $ O(n^2) $ (dużo).
 
-\subsection{Szybka transformata Fouriera}
-Szybka transformacja Fouriera FFT:
+\paragraph{DFT}
+jest procedurą matematyczną używaną do wyznaczenia zawartości harmonicznej lub częstotliwościowej sygnału dyskretnego.
 
-\subsection{Widomo sygnału}
-Widmem częstotliwościowym sygnału nazywa się przedstawienie sygnału w dziedzinie częstotliwości lub pulsacji otrzymane w wyniku transformacji Fouriera. Z wykresu widma możliwe jest odczytanie składowych harmonicznych sygnału. Charakterystyka widmowa istnieje tylko wtedy, gdy układ jest BIBO stabilny. Podstawienia  $s = j\omega$ wolno dokonać tylko wtedy, gdy funkcja H(s) nie ma biegunów w prawej domkniętej półpłaszczyźnie zmiennej s.
-\medskip 
+Dokładne wartości częstotliwości analizowanych przebiegów (czyli wartości prążków na osi x) zależą od częstotliwości próbkowania $ f_s $ i liczby próbek N. Przykładowo dla sygnału próbkowanego z $ f_s = 500 Hz $  i 16-punktowej DFT, podstawowa częstotliwość sinusoid wynosi $ fs/N= 31,25 Hz$. Czyli na otrzymanym wykresie wyznaczone są wartości prążków o częstotliwościach analizy: 0 Hz, 31.25, 62.6, 93.75 … 468.75Hz
 
-$A(\omega)~=~|H(j\omega)|$ - charakterystyka amplitudowa. Określa w jaki sposób modyfikowane jest widmo amplitudowe pobudzenia.
-\medskip 
+Wyjściowe wartości amplitud prążków DFT są równe amplitudzie wejściowej danej składowej (sinusoidy) * N/2.
 
-$\Theta(\omega)~=~argH(j\omega)$ - charakterystyka fazowa. Określa w jaki sposób jest modyfikowane widmo fazowe pobudzenia.
-\section{Modulacje analogowe i cyfrowe}
+
+%\hat{f}(\xi) = \lim_{T\to+\infty} \int\limits_{-T}^T f(x)\ e^{- 2\pi i x s}\,dx 
+%Transformata Fouriera jest wynikiem operacji zwanej transformacją Fouriera.
+%\subsection{Ciągła transformata Fouriera}
+%Jeżeli każdy skończony przedział <a,b> można podzielić na skończoną    liczbę    podprzedziałów,    w    których f(x) jest monotoniczna   oraz   w   każdym   punkcie   przedziału (a,b) są spełnione  warunki  Dirichleta  i  funkcja $f(t)$ jest  całkowalna  w przedziale (-inf, inf), to funkcję:
+%
+%\begin{equation}
+%\hat{f}(\omega)=\int_{-\infty }^{\infty}f(t) e^{-i\omega t}dt .
+%\end{equation}
+%
+%Transformacja   Fouriera   jest   operacją   odwracalną,   zatem posiadając transformatę $\hat{f}(\omega)$ możemy wyznaczyć jej oryginał:
+%
+%\begin{equation}
+%f(t)= \dfrac{1}{2\pi} \int_{-\infty }^{\infty}\hat{f}(\omega) e^{i\omega t}d\omega .
+%\end{equation}
+%
+%\subsection{Dyskretna transformata Fouriera}
+%Dyskretna transformata Fouriera DFT:
+%
+%\begin{equation}
+%A_{k}=\sum_{n=0}^{N-1}a_{n}w_{N}^{-kn}, ~~~0\le k \le N-1
+%\end{equation}
+%\begin{equation}
+%w_{N}=e^{i\dfrac{2\pi}{N}}
+%\end{equation}
+%
+%Odwrotna DFT:
+%\begin{equation}
+%a_{n}=\dfrac{1}{N}\sum_{k=0}^{N-1}A_{k}w_{N}^{kn}, ~~~0\le n \le N-1
+%\end{equation}
+%
+%\subsection{Szybka transformata Fouriera}
+%Szybka transformacja Fouriera FFT:
+%
+%\subsection{Widomo sygnału}
+%Widmem częstotliwościowym sygnału nazywa się przedstawienie sygnału w dziedzinie częstotliwości lub pulsacji otrzymane w wyniku transformacji Fouriera. Z wykresu widma możliwe jest odczytanie składowych harmonicznych sygnału. Charakterystyka widmowa istnieje tylko wtedy, gdy układ jest BIBO stabilny. Podstawienia  $s = j\omega$ wolno dokonać tylko wtedy, gdy funkcja H(s) nie ma biegunów w prawej domkniętej półpłaszczyźnie zmiennej s.
+%\medskip 
+%
+%$A(\omega)~=~|H(j\omega)|$ - charakterystyka amplitudowa. Określa w jaki sposób modyfikowane jest widmo amplitudowe pobudzenia.
+%\medskip 
+%
+%$\Theta(\omega)~=~argH(j\omega)$ - charakterystyka fazowa. Określa w jaki sposób jest modyfikowane widmo fazowe pobudzenia.
+%\section{Modulacje analogowe i cyfrowe}
 \subparagraph{Modulacja} - celowa lub samorzutna zmiana parametrów sygnału. \\
 
 Na wyjściu źródła informacji sygnał oryginalny jest przeważnie dolnopasmowy. Jednak kanały radiowe i telekomunikacyjne są zawsze środkowoprzepustowe. Aby zamienić sygnał oryginalny na sygnał środkowopasmowy musimy zastosować metodę zwaną modulacją. Modulacja jest to uzmiennienie standardowego przebiegu x(t) nazywanego sygnałem lub falą nośną przez sygnał z(t) zwany sygnałem modulującym. W wyniku tego jako sygnał wyjściowy uzyskujemy sygnał zmodulowany y(t). Schemat blokowy procesu modulacji został przedstawiony na rysunku \ref{rys:modulacja_blok}. Inaczej mówiąc modulacja to zmiana parametrów fali nośnej, która może być np. sinusoidalna lub prostokątna. W przypadku modulowania fal sinusoidalnych zmianom może ulegać amplituda, częstotliwość lub faza. Natomiast dla fal prostokątnych szerokość, amplituda lub ilość impulsów. W zależności od charakteru zmian parametru modulowanego rozróżniamy modulacje analogowe (zmiany o charakterze ciągłym) oraz cyfrowe (zmiany o charakterze skokowym).
