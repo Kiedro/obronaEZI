@@ -1,4 +1,4 @@
-\documentclass[]{report}
+\documentclass[a4paper,twoside]{report}
 
 \usepackage[T1]{fontenc}
 \usepackage[polish]{babel}
@@ -17,7 +17,10 @@
 \selectlanguage{polish}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{geometry}
 
+\newgeometry{tmargin=2.5cm, bmargin=2.5cm, lmargin=2.5cm, rmargin=2.5cm}
+\renewcommand*\thesection{\arabic{section}} % zmiana numeracji sekcji 0.X -> X
 \author{\textbf{KN EZI Team}}
 \title{Opracowanie pytań do obrony (EZI)}
 \frenchspacing
@@ -1394,6 +1397,8 @@ Pamięć programu i pamięć danych są oddzielone od siebie, ale wykorzystują 
 
 \subparagraph{RISC} (ang. Reduced Instruction Set Computing/Computer) wywodzi się z Berkeley (1985). Koncepcja tego typu architektury jest oparta na ograniczeniu liczby krótkich (maksymalnie dwusłowowych) rozkazów mających niewiele formatów i trybów adresowania. Procesor RISC posiada wiele rejestrów uniwersalnych (nawet powyżej 100). Działanie procesora przyśpieszają dodatkowe ulepszenia, np. przetwarzanie potokowe, czy pamięć podręczna. Instrukcje wykonująproste operacje, dzięki czemu mogą to robić szybko - każda jednostka wykonawcza jest w stanie wykonać dokładnie jednąinstrukcję w jednym cyklu zegara. Lista instrukcji zawiera tylko kilka rozkazów umożliwiających dostęp do pamięci: załadowanie (load), zapis (store) oraz instrukcje semaforowe. Wszystkie pozostałe rozkazy operują wyłącznie na rejestrach - to również upraszcza budowę układu. Instrukcje kodowane są w prosty sposób - każdy rozkaz ma taką samą długość (np. 32 bity).
 
+\subparagraph{VLIW} (ang. Very Long Instruction Word) – nazwa architektury mikroprocesorów z bardzo długim słowem instrukcji. Obecnie procesory VLIW są oparte na architekturze RISC, zazwyczaj z czterema lub maksymalnie ośmioma jednostkami obliczeniowymi. Po normalnej kompilacji programu, kompilator VLIW porządkuje kod na ścieżki, które wprost nie posiadają jakichkolwiek zależności. Następnie są one dzielone na cztery lub więcej części (jeden dla każdej jednostki obliczeniowej CPU) i pakowane razem w większe instrukcje z dodatkową informacją odnośnie do jednostki, na której ma być wykonywana. Rezultatem tego jest pojedynczy wielki opcode - kod operacji, stąd nazwa ,,Very Long''.
+
 \subsection{Budowa}
 Jeśli chodzi o budowę fizyczną, mikroprocesor to nic innego jak krzemowa płytka z milionem tranzystorów, które blokują lub umożliwiają przepływ prądu. Z tranzystorów budowane są bramki logiczne, a te z kolei są łączone w bardziej rozbudowane układy.
 
@@ -1431,6 +1436,7 @@ Na system mikroprocesorowy składa się mikroprocesor, układy wejścia/wyjścia
 \end{itemize}
 
 \section{Sieci komputerowe: budowa, protokoły, zastosowanie}
+
 \textbf{Sieć komputerowa} - wzór wzajemnie połączonych komputerów, które mogą pracować samodzielnie i komunikować się z innymi komputerami.
 
 \subsection{Budowa}
@@ -1560,8 +1566,6 @@ System  DNS  jest  rozproszoną  bazą  danych obsługiwaną przez wiele serwer�
 
 \subparagraph{UDP} (ang. User   Datagram   Protocol)   działa    w    warstwie    transportowej   w   \emph{trybie bezpołączeniowym}.  Protokół  ten  nie  gwarantuje  dostarczenia  danych  do  odbiorcy.  Jeżeli  pakiet  nie dotrze  do  odbiorcy,  lub  dotrze  uszkodzony,  UDP  nie podejmie żadnych  działań  zmierzających  do retransmisji  danych,  a  zapewnienie  niezawodności  pozostawi  warstwie  wyższej.   Protokół wykorzystywany jest do szybkiego przesyłania danych w niezawodnych sieciach. 
 
-
-%\chapter{}
 
 
 
