@@ -723,6 +723,156 @@ ograniczenia problemu.
 
 \chapter{Systemy dynamiczne, opisy własności}
 
+\textbf{Układ dynamiczny}, to model matematyczny rzeczywistego zjawiska przyrody, którego przyszłe zachowanie(stan,ewolucja) jest wyznaczone jednoznacznie przez stan początkowy i sygnał sterujący. Najczęściej jest opisany pewnym wektorowym równaniem różniczkowym -zwanym równaniem stanu układu. 
+\section{Podział układów}
+\paragraph{Ze względu na charakter sygnałów}
+\begin{itemize}
+	\item \textbf{Układy ciągłe }- wszystkie sygnały (wejściowe i wyjściowe) są funkcjami ciągłymi w czasie i mogą
+	przybierać dowolna wartość z obszaru swojej zmienności. Układy te opisuje się zwykle równaniami różniczkowymi.
+	\item \textbf{Układy dyskretn}e - układ jest dyskretny, jeżeli przynajmniej jeden jego sygnał ma charakter dyskretny,
+	tzn. przyjmuje tylko określone wartości dla określonych argumentów. Układy takie opisuje się zwykle równaniami
+	różnicowymi.
+\end{itemize}
+\paragraph{Ze względu na charakter układu}
+\begin{itemize}
+	\item \textbf{Układy statyczne} (bezinercyjne) - wyjście w
+	danej chwili czasu zależy tylko od wejścia (brak
+	stanu nieustalonego). Układy te składają się
+	tylko z elementów rozpraszających energie i
+	opisuje się je równaniami algebraicznymi.
+	\item \textbf{Układy dynamiczne} - układy, w których wyjście
+	nie jest jednoznaczna funkcja wejścia i zależy
+	dodatkowo od charakteru procesu
+	przejściowego (inercyjności) i stanu układu w
+	chwili początkowej. Układy te zawierają
+	elementy magazynujące energie. Opisuje się je
+	równaniami różniczkowymi lub różnicowymi
+\end{itemize}  
+\paragraph{Ze względu na liniowość układu}
+\begin{itemize}
+	\item Układy liniowe - można je opisać za pomocą liniowych równań
+	algebraicznych, różniczkowych lub różnicowych.
+	\textbf{Układy liniowe spełniają zasadę superpozycji}
+	\item Układy nieliniowe - układ zawierający przynajmniej jeden element
+	nieliniowy jest układem nieliniowym.
+\end{itemize}
+
+
+\textit{W praktyce każdy układ fizyczny jest nieliniowy. Model linowy powstaje
+	na podstawie przybliżenia zakładającego liniowość fizycznego
+	zjawiska i stałość parametrów lub w wyniku linearyzacji wyznaczonej
+	nieliniowej charakterystyki. Linearyzacje przeprowadza się zwłaszcza
+	wtedy, gdy działanie procesu ogranicza się do niewielkiego obszaru
+	wokół pewnego ustalonego punktu pracy.}
+\section{Transmitancja operatorowa układu}
+\textbf{Transmitancja operatorowa}(funkcja przejścia, $G(s)$) - stosunek transformaty Laplace`a sygnału wyjściowego do transformaty Laplace`a sygnału wejściowego układu przy zerowych warunkach początkowych:
+\begin{center}
+	$ G(s)=\frac{Y(s)}{U(s)}$
+\end{center} 
+Transmitancja określa ogólne własności stacjonarnego układu liniowego o jednym wejściu i jednym wyjściu, niezależne od rodzaju wymuszenia. Dla układu wielowymiarowego o r wejściach o m wyjściach można określić $ mxn$ transmitancji wiążących każde wyjście z każdym wejściem.
+\section{Charakterystyki}
+\subsection{Czasowa}
+{\textbf{Charakterystyka czasowa}} układu liniowego jest jego odpowiedz na określone
+wymuszenie przy założeniu zerowych warunków początkowych. Sygnałem
+wejściowym może być impuls Diraca $ \delta(t) $, skok jednostkowy 1(t) (funkcja
+Heaviside’a) lub sygnał narastający liniowo (rampa).
+
+
+\paragraph{\textit{Należy zaznaczyć, że zarówno impuls Diraca, jak i skok jednostkowy sa
+		sygnałami niemożliwymi do generacji z uwagi na skończoną szybkość zmian
+		wartości sygnałów (na przykład skończoną prędkość przestawiania zaworu
+		przez siłownik) lub niebezpieczeństwo wywołania dynamicznego wejścia
+		obiektu rzeczywistego w zakres nieliniowości}}
+\subsection{Skokowa}
+\textbf{Charakterystyka skokowa} (odpowiedzią skokowa) h(t) układu liniowego jest
+jego odpowiedz na wymuszenie skokiem jednostkowym u(t) = 1(t) przy
+zerowych warunkach początkowych. Jest ona bardzo ważnym elementem teorii
+sterowania, ponieważ opisuje właściwości dynamiki układu w zależności
+jedynie od jego parametrów i pojedynczej wartości opisującej skok (amplitudy).
+
+\paragraph{\textit{Charakterystyka skokowa umożliwia proste wyznaczenie współczynnika
+		wzmocnienia obiektu statycznego, równego stosunkowi wartości ustalonej
+		odpowiedzi skokowej do wartości sygnału wejściowego.}}
+\subsection{Impulsowa}
+\textbf{Charakterystyka impulsowa} (odpowiedzią impulsowa) g(t) układu liniowego
+jest jego odpowiedz na wymuszenie impulsem Diraca $u(t)=\delta(t) $ przy zerowych
+warunkach początkowych. Podobnie jak charakterystyka skokowa opisuje
+również właściwości dynamiki układu w zależności od jego parametrów.
+\paragraph Charakterystyka impulsowa umożliwia w prosty sposób określenie, czy obiekt jest
+astatyczny – w tym przypadku wartość $g(t)$ w stanie ustalonym jest niezerowa.
+\subsection{Charakterystyka amplitudo-fazowa}
+Charakterystyka amplitudowo-fazowa (wykresem Nyquista) nazywa się wykres
+transmitancji widmowej na płaszczyźnie zmiennej zespolonej, przy czym na osi
+rzędnych (osi licz rzeczywistych) odłożona jest wartość $P(\omega)$, a na osi
+odciętych (osi liczb urojonych) wartość $Q(\omega)$
+\begin{figure}[H]
+	\includegraphics[scale=0.7]{obrazy/dynamiczne/nyquist.png}
+\end{figure}
+
+\section{Człony dynamiczne}
+Tutaj właściwie jest Rozdział 3(dokładnie 9 stron) z książki Greblickiego do przepisania, więc bezsensem byłoby to kopiować.
+\section{Stabilność}
+Stabilność jest jest jedną z najważniejszych własności, której wymaga się od systemu dynamicznego.
+\subsection{Twierdzenia i Definicje}
+\paragraph{Definicja stabilności} Jeśli przy zerowym pobudzeniu i każdym warunku początkowym
+\begin{center}
+	$ [tex]\lim_{t\to\infty}y(t)=0 $
+\end{center}
+to system nazywamy stabilnym
+\paragraph System jest stabilny wtedy i tylko wtedy, gdy wszystkie bieguny jego transmitancji leżą w lewej półpłaszczyźnie płaszczyzny liczb zespolonych.
+\paragraph{Granica stabilności} System znajduje się na granicy stabilności wtedy i tylko wtedy :
+\begin{center}
+	$Res_{1}\le0,Res_{2}\le0,...,Re s_{m}\le0, $
+\end{center}
+przy czym bieguny transmitancji, dla których zachodzą równości, są co najwyżej jednokrotne.
+\subsection{Kryteria stabilności}
+\paragraph{Twierdzenie o znaku współczynnków}
+Jest to warunek konieczny.
+
+Niech $ a_{m}>0 $. Jeśli system jest stabilny to
+\begin{center}
+	$ a_{0}>0,a_{1}>0,...,a_{m-1}>0 $
+\end{center} 
+\paragraph{Kryterium Routha-Hurwitza}
+Jest to warunek wystarczający.
+\begin{center}
+	$\Delta_{1}\neq 0,\Delta_{2}\neq 0,...,\Delta{m}\neq 0 $
+\end{center}
+to żaden z pierwiastków wielomianu M(s)nie leży na osi $j\omega $
+Z twierdzenia wynika oczywisty wniosek, że jeśli wszystkie $ \Delta$ są większe od zera to system jest stabilny.
+
+
+\paragraph{Kryterium Hurwitza}
+Niech $ a_{m}>0$. System jest stabilny wtedy i tylko wtedy gdy :
+\begin{center}
+	$\Delta_{1}$>0,$\Delta_{2}$>0,...,$\Delta{m}$>0
+\end{center}
+\textbf{Warunek konieczny i wystarczający}
+\paragraph{Kryterium Michajłowa}
+Niech $ a_{m}>0$.System jest stabilny wtedy i tylko wtedy, gdy:
+\begin{center}
+	$ M(j\omega)\neq 0$ dla wszystkich $\omega \in [0,\inf) $ 
+\end{center}
+oraz
+\begin{center}
+	$\Delta arg M(j\omega)= m\frac{\pi}{2}  $
+\end{center}
+\begin{figure}[H]
+	\includegraphics[scale=0.7]{obrazy/dynamiczne/Michajlow_przyklad.png}
+\end{figure}
+Układ automatycznej regulacji jest stabilny, gdy zmiana argumentu funkcji N(j$\omega$) przy zmianie pulsacji $\omega$
+od zera do +$\inf$ wynosi n$\frac{\pi}{2}$, gdzie n oznacza stopień równania charakterystycznego.
+
+\paragraph{Kryterium Nyquista}
+
+Układ zamknięty jest stabilny, jeżeli logarytmiczna charakterystyka amplitudowa układu otwartego posiada wartość ujemną dla pulsacji odpowiadającej przesunięciu fazowemu - $\pi$
+\begin{figure}[H]
+	\includegraphics[scale=0.7]{obrazy/dynamiczne/Przyklad_nyquist.png}
+\end{figure}
+\paragraph{DODATEK}
+Gdyby ktoś potrzebował większego przypomnienia z kryteriów : http://home.agh.edu.pl/~pautom/pliki/wyklady/przykladowe/08.pdf
++ warto przypomnieć sobie rozwiązywanie równań różniczkowych
+
 
 \chapter{Programowanie w systemie operacyjnym Unix}
 \section{Interpreter komend Bourne shell, podstawowe mechanizmy, pisanie skryptów, rozszerzenia POSIX }
