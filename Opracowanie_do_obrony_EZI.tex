@@ -722,7 +722,9 @@ ograniczenia problemu.
 \end{enumerate}
 
 \chapter{Systemy dynamiczne, opisy własności}
-\section{Programowanie w systemie operacyjnym Unix}
+
+
+\chapter{Programowanie w systemie operacyjnym Unix}
 \subsection{Programowanie w języku powłoki}
 
 \paragraph{Powłoka} (ang. shell) jest programem umożliwiającym pracę z systemem   UNIX. Jej nazwa wywodzi się z graficznej prezentacji systemu, w której jądro i procesy obsługi wejścia i wyjścia są otoczone właśnie przez powłokę. Jej funkcją jest odseparowanie użytkownika od bezpośredniego dostępu do jądra systemu i umożliwienie   łatwej i wszechstronnej pracy. Podstawowym zadaniem powłoki jest przyjmowanie     poleceń użytkownika i uruchamianie stosownych programów. Do dalszych funkcji powłoki należy konstruowanie parametrów dla poleceń oraz zarządzanie sposobem wykonywania programów procesów. Następnym, bardziej skomplikowanym krokiem jest tworzenie   funkcji i procedur powłoki(skryptów) pozwalających   na łączenie wielu   poleceń  w   jedno,umożliwiając pisanie całych programów dla powłoki.Powłoka jest programem, z którym użytkownik systemu UNIX spotyka się na samym początku. Jej uruchomienie   następuje   automatycznie,bezpośrednio po zalogowaniu (zgłoszeniu) użytkownika w systemie. Gdy widzimy na ekranie znak ,,\$'',   oznacza   to,  że   powłoka   jest   już uruchomiona i oczekuje na podawanie poleceń. 
@@ -768,7 +770,7 @@ Nazwą polecenia jest nazwa jakiegokolwiek programu, funkcji powłoki lub funkcj
 
 \subsection{Programowanie w C}
 
-\section{Komputer, architektura i oprogramowanie}
+\chapter{Komputer, architektura i oprogramowanie}
 \paragraph{Komputer} [ang. < łac. computare ‘rozważać’, ‘obliczyć’], elektroniczna maszyna cyfrowa, urządzenie elektroniczne przeznaczone do przetwarzania informacji (danych) przedstawionych w postaci cyfrowej, sterowane programem zapisanym w pamięci.
 Pojęcie komputera obejmuje obecnie zarówno komputery zaprogramowane na stałe, używane jako automaty sterujące, np. w urządzeniach gospodarstwa domowego, jak i komputery uniwersalne, dające się dowolnie zaprogramować.
 
@@ -882,7 +884,7 @@ Języki wspierające programowanie obiektowe m.in.: C\#, Java, C++, JavaScript, 
 Źródło : materiały PW
 
 
-\section{Fala elektromagnetyczna: typy, parametry, właściwości}
+\chapter{Fala elektromagnetyczna: typy, parametry, właściwości}
 \paragraph{Pole elektryczne} – każdy ładunek wytwarza w przestrzeni wokół siebie pole elektryczne, siła elektrostatyczna działająca na dowolny ładunek jest wywołana polem elektrycznym, wytworzonym przez inne ładunki w miejscu w którym znajduje się rozważany ładunek.
 
 \paragraph{Pole magnetyczne} – wytwarzany przez magnes, jest to pole wektorowe tak jak w przypadku pola elektrycznego. W elektromagnesie pole magnetyczne wytwarzane jest za pomocą przepływu prądu przez cewkę nawiniętą na metalowy rdzeń z żelaza. O sile pola decyduje wartość natężenia prądu. Magnesy trwałe zawierają cząstki elementarne (elektrony) które wytwarzają własne pole magnetyczne. W niektórych materiałach pola magnetyczne elektronów sumują się wytwarzając wokół nich wypadkowe pole magnetyczne.
@@ -961,7 +963,7 @@ $\hat{k}$ - wektor jednostkowy w kierunku rozchodzenia się fali.
 \label{rys:widmo}
 \end{figure}
 
-\section{Tranzystory bipolarne i unipolarne: budowa, właściwości i zastosowania}
+\chapter{Tranzystory bipolarne i unipolarne: budowa, właściwości i zastosowania}
 
 
 \subsection{Tranzystory bipolarne}  
@@ -1237,7 +1239,7 @@ system statyczny jest niezmienny w czasie, może być abstrakcyjny lub fizyczny,
 \end{itemize}
 \end{itemize}
 
-\section{Zmienna losowa: właściwości, opis}
+\chapter{Zmienna losowa: właściwości, opis}
 
 \subsection{Zmienne losowe}
 
@@ -1338,11 +1340,11 @@ V(x) = E[X - E(X)]^2 = E(X^2)-E(X)^2
 
 
 
-\section{Ciągła, dyskretna i szybka transformata Fouriera, widmo sygnału}
+\chapter{Ciągła, dyskretna i szybka transformata Fouriera, widmo sygnału}
 \paragraph{Ogólnie}
  W dziedzinie przetwarzania sygnałów \textbf{transformacja} Fouriera używana jest do przetworzenia funkcji x(t) ciągłej lub dyskretnej w dziedzinie czasu na funkcję X(s) ciągłą lub dyskretną w dziedzinie częstotliwości. Ocena wyrażenia X(s) pozwala określić zawartość częstotliwościową dowolnego sygnału. 
 
-\subsection{Ciągła transformata Fouriera}
+\section{Ciągła transformata Fouriera}
 \paragraph{Transformata Fouriera}
  - wynik operatora liniowego (czyli jednorodny [$ cf(x) = f(cx) $] i addytywny [$ f(a+b)=f(a)+f(b) $] ) jakim jest \textbf{transformacja} Fouriera. Dzięki liniowości możemy transformować sygnały rzeczywiste, w innym przypadku byłyby to jedynie sygnały zawierające pojedynczy przebieg sinusoidalny.
 
@@ -1353,65 +1355,93 @@ a transformację odwrotną
 
 $$ f(x) = \int\limits_{-\infty}^{+\infty} F(s)\ e^{2\pi i x s}\,ds, $$
 
-\subsection{Dyskretna transformata Fouriera (DFT)}
+\section{Dyskretna transformata Fouriera (DFT)}
 W praktyce pomiary pozwalają otrzymać dane o charakterze dyskretnym, stąd też zdefiniowana jest dyskretna transformata Fouriera (dyskretne przekształcenie Fouriera, DFT), używana w cyfrowym przetwarzaniu sygnałów:
 
 $$ X(m)= \sum_{n=0}^{N-1}{x(n) e^{- \frac{2 \pi i n m}{N}}} , \ 0 \le k \le N-1 $$
 gdzie x(n) to dyskretny ciąg wartości ciągłej zmiennej x(t), spróbkowanej w dziedzinie czasu, 
 
 N – liczba próbek wejściowych w dziedzinie czasu. \\
- DFT wyznacza zawartość widmową sygnału wejściowego w N równomiernie rozłożonych punktach na osi częstotliwości. N określa ile próbek wejściowych jest wymaganych do policzenia DFT, jaka jest rozdzielczość wyników w dziedzinie częstotliwości (odległość pomiędzy prążkami w Hz) oraz jaki jest czas przetwarzania wymagany do obliczenia N-punktowej DFT. Ze wzoru na DFT wynika bowiem, iż złożoność obliczeniowa algorytmu wynosi $ O(n^2) $ (dużo).
+ DFT wyznacza zawartość widmową sygnału wejściowego w N równomiernie rozłożonych punktach na osi częstotliwości. N określa ile próbek wejściowych jest wymaganych do policzenia DFT, jaka jest rozdzielczość wyników w dziedzinie częstotliwości (odległość pomiędzy prążkami w Hz) oraz jaki jest czas przetwarzania wymagany do obliczenia N-punktowej DFT. Ze wzoru na DFT wynika bowiem, iż złożoność obliczeniowa algorytmu wynosi $ O(n^2) $ ( to dużo).
 
 \paragraph{DFT}
-jest procedurą matematyczną używaną do wyznaczenia zawartości harmonicznej lub częstotliwościowej sygnału dyskretnego.
+\begin{itemize}
+	\item jest procedurą matematyczną używaną do wyznaczenia zawartości harmonicznej lub częstotliwościowej sygnału dyskretnego.
+	\item Dokładne wartości częstotliwości analizowanych przebiegów (czyli wartości prążków na osi x) zależą od częstotliwości próbkowania $ f_s $ i liczby próbek N. Przykładowo dla sygnału próbkowanego z $ f_s = 500 Hz $  i 16-punktowej DFT, podstawowa częstotliwość sinusoid wynosi $ fs/N= 31,25 Hz$. Czyli na otrzymanym wykresie wyznaczone są wartości prążków o częstotliwościach analizy: 0 Hz, 31.25, 62.6, 93.75 … 468.75Hz
+	\item Wyjściowe wartości amplitud prążków DFT są równe amplitudzie wejściowej danej składowej (sinusoidy) * N/2.
+	\item jeżeli ciąg wejściowy $ x(n) $ jest rzeczywisty, to zespolone wartości wyjściowe DFT dla argumentów $ m >= (N/2) $ są nadmiarowe w stosunku do wartości wyjściowych dla argumentów od $ m = 0 $ do $ m = (N/2)-1 $. \textit{m}-ta wartość wyjściowa DFT będzie miała taką samą amplitudę jak $(N-m)$-ta wartość wyjściowa DFT. Kąt fazowy $m$-tej wartości będzie równy kątowi fazowemu $(N-m)$-tej wartości wyjściowej DFT, ze znakiem ujemnym. \\
+	Jeżeli ciąg wyjściowy DFT jest rzeczywisty, to $X(m)$ jest sprzężeniem $X(Nm)$, lub:
+$$ X(m) = X^*(N-m) $$
+gdzie $ ^* $ oznacza sprzężenie.
+\end{itemize}
 
-Dokładne wartości częstotliwości analizowanych przebiegów (czyli wartości prążków na osi x) zależą od częstotliwości próbkowania $ f_s $ i liczby próbek N. Przykładowo dla sygnału próbkowanego z $ f_s = 500 Hz $  i 16-punktowej DFT, podstawowa częstotliwość sinusoid wynosi $ fs/N= 31,25 Hz$. Czyli na otrzymanym wykresie wyznaczone są wartości prążków o częstotliwościach analizy: 0 Hz, 31.25, 62.6, 93.75 … 468.75Hz
+Podsumowanie:
+\begin{itemize}
+	\item każdy człon wyjściowy DFT jest sumą iloczynów wejściowego ciągu w dziedzinie czasu z ciągami reprezentującymi przebieg sinusoidalny i cosinusoidalny, ponieważ można napisać wzór na DFT z użyciem współrzędnych prostokątnych:
+	$$ X(m)= \sum_{n=0}^{N-1}{x(n) [\cos(\frac{2 \pi n m}{N}) - i \sin(\frac{2 \pi n m}{N})]}   $$
+	\item dla rzeczywistych sygnałów wejściowych N-punktowa DFT daje w wyniku jedynie N/2 członów niezależnych,
+	\item DFT jest operacją liniową,
+	\item amplitudy składowych wyjściowych DFT są wprost proporcjonalne do N,
+	\item rozdzielczość DFT w dziedzinie częstotliwości wynosi $ f_s/N $
+\end{itemize}
 
-Wyjściowe wartości amplitud prążków DFT są równe amplitudzie wejściowej danej składowej (sinusoidy) * N/2.
+\subsection{Przeciek DFT}
+Jeżeli sygnał wejściowy zawiera częstotliwość która nie należy do częstotliwości ze zbioru $ mfs/N $ (czyli jest gdzieś pomiędzy prążkami wynikowymi) to energia tej składowej ujawni się w pewnym stopniu przy wszystkich N wartościach wyjściowych (czyli prążkach).
 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.7]{obrazy/fourier/3okresy.png}
+	\caption{Wynik 64 punktowej DFT sygnału o częstotliwości 3 okresów w analizowanym oknie 64 próbek. }
+\end{figure}
 
-%\hat{f}(\xi) = \lim_{T\to+\infty} \int\limits_{-T}^T f(x)\ e^{- 2\pi i x s}\,dx 
-%Transformata Fouriera jest wynikiem operacji zwanej transformacją Fouriera.
-%\subsection{Ciągła transformata Fouriera}
-%Jeżeli każdy skończony przedział <a,b> można podzielić na skończoną    liczbę    podprzedziałów,    w    których f(x) jest monotoniczna   oraz   w   każdym   punkcie   przedziału (a,b) są spełnione  warunki  Dirichleta  i  funkcja $f(t)$ jest  całkowalna  w przedziale (-inf, inf), to funkcję:
-%
-%\begin{equation}
-%\hat{f}(\omega)=\int_{-\infty }^{\infty}f(t) e^{-i\omega t}dt .
-%\end{equation}
-%
-%Transformacja   Fouriera   jest   operacją   odwracalną,   zatem posiadając transformatę $\hat{f}(\omega)$ możemy wyznaczyć jej oryginał:
-%
-%\begin{equation}
-%f(t)= \dfrac{1}{2\pi} \int_{-\infty }^{\infty}\hat{f}(\omega) e^{i\omega t}d\omega .
-%\end{equation}
-%
-%\subsection{Dyskretna transformata Fouriera}
-%Dyskretna transformata Fouriera DFT:
-%
-%\begin{equation}
-%A_{k}=\sum_{n=0}^{N-1}a_{n}w_{N}^{-kn}, ~~~0\le k \le N-1
-%\end{equation}
-%\begin{equation}
-%w_{N}=e^{i\dfrac{2\pi}{N}}
-%\end{equation}
-%
-%Odwrotna DFT:
-%\begin{equation}
-%a_{n}=\dfrac{1}{N}\sum_{k=0}^{N-1}A_{k}w_{N}^{kn}, ~~~0\le n \le N-1
-%\end{equation}
-%
-%\subsection{Szybka transformata Fouriera}
-%Szybka transformacja Fouriera FFT:
-%
-%\subsection{Widomo sygnału}
-%Widmem częstotliwościowym sygnału nazywa się przedstawienie sygnału w dziedzinie częstotliwości lub pulsacji otrzymane w wyniku transformacji Fouriera. Z wykresu widma możliwe jest odczytanie składowych harmonicznych sygnału. Charakterystyka widmowa istnieje tylko wtedy, gdy układ jest BIBO stabilny. Podstawienia  $s = j\omega$ wolno dokonać tylko wtedy, gdy funkcja H(s) nie ma biegunów w prawej domkniętej półpłaszczyźnie zmiennej s.
-%\medskip 
-%
-%$A(\omega)~=~|H(j\omega)|$ - charakterystyka amplitudowa. Określa w jaki sposób modyfikowane jest widmo amplitudowe pobudzenia.
-%\medskip 
-%
-%$\Theta(\omega)~=~argH(j\omega)$ - charakterystyka fazowa. Określa w jaki sposób jest modyfikowane widmo fazowe pobudzenia.
-%\section{Modulacje analogowe i cyfrowe}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.7]{obrazy/fourier/34okresy.png}
+	\caption{Wynik DFT dla sygnału o częstotliwości 3.4 okresów w analizowanym oknie 64 próbek. }
+\end{figure}
+
+Łopatologicznie: 8 punktowa DFT przy próbkowaniu 8000Hz daje prążki w punktach 0Hz, 1000Hz, 2000Hz… 7000Hz, jak sygnał wejściowy ma składową 1500Hz to ta „rozlewa” się na wszystkie prążki. 
+\paragraph{Przeciek}
+ jest nie do uniknięcia przy wyznaczaniu DFT rzeczywistego ciągu czasowego o skończonej długości.
+W celu zminimalizowania skutków przecieku można użyć funkcji okna (jednego z miliona) na wartościach wejściowego ciągu czasowego.
+Jak polepszyć rozdzielczość DFT? Zwiększyć N, nawet gdy nie mamy więcej próbek, to zawsze można dodać zera i liczyć dla takiego sygnału. 
+Poprawa rozdzielczości DFT poprzez uzupełnianie zerami.
+
+\section{Szybka transformata Fouriera (FFT)}
+Wyznaczenie DFT o tysiącach punktów jest nieefektywne czasowo, tzn. wymaga olbrzymiej mocy obliczeniowej, z tego powodu w 1965 roku opublikowano artykuł przedstawiający wydajny algorytm implementujący DFT znany dzisiaj jako szybkie przekształcenie Fouriera  - FFT. Algorytm przetransformował dziedzinę cyfrowego przetwarzania sygnałów.
+Z wielu zaproponowanych algorytmów najpopularniejszym jest algorytm FFT o podstawie 2, tzn. liczba punktów w transformacji wynosi N=2k, gdzie k jest liczbą naturalną.
+
+Zaleta FFT o podstawie 2 i metody wykorzystania:
+\begin{itemize}
+	\item Redukcja ilości mnożeń z N2 do około N/2*log2N, dla N = 512 to 200 razy mniej mnożeń zespolonych, dla N = 8192 redukcja 1000 krotna. 
+	\item FFT nie przybliża DFT, ale daje dokładny wynik DFT, z zachowaniem wszystkich właściwości DFT! 
+	\item Jeżeli nie mamy wpływu na ilość pobieranych próbek, a nie jest to liczba N2 to należy dodać zera do najbliższej potęgi 2, nigdy nie obcinać.
+	\item Poprawianie wyników FFT - do wykrycia sygnałów w obecności szumu, można wykorzystać uśrednianie kolejnych procedur FFT
+\end{itemize}
+
+\paragraph{Opis algorytmu}
+Obliczenie N-punktowej FFT można przyspieszyć przez policzenie FFT N/2 punktowej, którą można przyspieszyć przez policzenie N/4 FFT itd. Za każdym razem obliczenie drugiej połowy FFT jest jedynie kwestią kilku dodawań i przemnożenia przez -1 więc znacząco zmniejsza się ilość operacji (dodatkowo, dodawanie i zmiana znaku jest tańsze od mnożenia)
+
+Warto nauczyć się chociaż jak narysować „motylki” FFT, nie ma sensu tego przepisywać tylko od strony 8 rozdziału 4 z książki Lyonsa.
+
+\newpage
+\section{Widmo sygnału}
+Określenie składowych częstotliwościowych sygnałów dyskretnych w dziedzinie czasu, dokonywane jest w \textit{ dziedzinie częstotliwości}. Zobrazowane X(m) (czyli wartości prążków sygnału) zwane są widmem sygnału.
+x(n) – ciąg czasowy sygnału
+X(m) – ciąg widmowy X zmiennej m
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.7]{obrazy/fourier/widmo.png}
+	\caption{Wynik DFT dla sygnału o częstotliwości 3.4 okresów w analizowanym oknie 64 próbek. }
+\end{figure}
+
+\paragraph{Widmo} - przedstawienie sygnału w dziedzinie częstotliwości lub pulsacji, otrzymane przy pomocy transformacji Fouriera.
+Z wykresu tego można przykładowo odczytać, jakie składowe harmoniczne wchodzą w skład danego sygnału, czy sygnał ma ograniczone pasmo, jaka jest szerokość jego pasma, czy zawiera składowe wolnozmienne (o małych częstotliwościach) oraz szybkozmienne (o wielkich częstotliwościach). 
+
+Ponieważ transformata Fouriera  $ F(j \omega) $ jest w ogólności funkcją o wartościach zespolonych, zatem przy wykonywaniu wykresów widma wygodne jest niezależne przedstawianie modułu  $ M(\omega) = | F(j \omega) | $ oraz argumentu $ \theta(\omega) = \arg{F(j \omega)} $ . Wykres \textbf{widma amplitudowego}(wykres modułu) pokazuje, jakie są amplitudy składowych widmowych sygnału o różnych częstotliwościach. Wykres\textbf{ widma fazowego} (wykres argumentu) pokazuje, jakie są fazy tych składowych.
+
+\chapter{Modulacje analogowe i cyfrowe}
 \subparagraph{Modulacja} - celowa lub samorzutna zmiana parametrów sygnału. \\
 
 Na wyjściu źródła informacji sygnał oryginalny jest przeważnie dolnopasmowy. Jednak kanały radiowe i telekomunikacyjne są zawsze środkowoprzepustowe. Aby zamienić sygnał oryginalny na sygnał środkowopasmowy musimy zastosować metodę zwaną modulacją. Modulacja jest to uzmiennienie standardowego przebiegu x(t) nazywanego sygnałem lub falą nośną przez sygnał z(t) zwany sygnałem modulującym. W wyniku tego jako sygnał wyjściowy uzyskujemy sygnał zmodulowany y(t). Schemat blokowy procesu modulacji został przedstawiony na rysunku \ref{rys:modulacja_blok}. Inaczej mówiąc modulacja to zmiana parametrów fali nośnej, która może być np. sinusoidalna lub prostokątna. W przypadku modulowania fal sinusoidalnych zmianom może ulegać amplituda, częstotliwość lub faza. Natomiast dla fal prostokątnych szerokość, amplituda lub ilość impulsów. W zależności od charakteru zmian parametru modulowanego rozróżniamy modulacje analogowe (zmiany o charakterze ciągłym) oraz cyfrowe (zmiany o charakterze skokowym).
@@ -1510,9 +1540,10 @@ Modulacja MSK zalicza się do klasy modulacji z ciągłą fazą CPM (ang. Contin
 \item telefonia cyfrowa (GSM, UMTS, TETRA, ...),
 \item łączność satelitarna.
 \end{itemize}
-\section{Wzmacniacze operacyjne: właściwości i zastosowania}
+\chapter{Wzmacniacze operacyjne: właściwości i zastosowania}
 Materiały: wzmacniacze\_operacyjne.pdf
-\section{Mikroprocesory: budowa, zastosowania}
+
+\chapter{Mikroprocesory: budowa, zastosowania}
 \subsection{Architektury}
 \subparagraph{Architektura harwardzka}
 W tej architektura pamięć programu przechowująca rozkazy została oddzielona od pamięci danych (dwie różne magistrale). W trakcie pobierania argumentów wykonywanej właśnie instrukcji można równocześnie zacząć pobieranie następnego słowa rozkazowego (pre-fetch).
@@ -1565,7 +1596,7 @@ Na system mikroprocesorowy składa się mikroprocesor, układy wejścia/wyjścia
 \item automatyka budynków - sterowniki klimatyzacji i rolet.
 \end{itemize}
 
-\section{Sieci komputerowe: budowa, protokoły, zastosowanie}
+\chapter{Sieci komputerowe: budowa, protokoły, zastosowanie}
 
 \textbf{Sieć komputerowa} - wzór wzajemnie połączonych komputerów, które mogą pracować samodzielnie i komunikować się z innymi komputerami.
 
