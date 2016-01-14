@@ -725,40 +725,41 @@ ograniczenia problemu.
 
 
 \chapter{Programowanie w systemie operacyjnym Unix}
+\section{Interpreter komend Bourne shell, podstawowe mechanizmy, pisanie skryptów, rozszerzenia POSIX }
+
 \subsection{Programowanie w języku powłoki}
 
-\paragraph{Powłoka} (ang. shell) jest programem umożliwiającym pracę z systemem   UNIX. Jej nazwa wywodzi się z graficznej prezentacji systemu, w której jądro i procesy obsługi wejścia i wyjścia są otoczone właśnie przez powłokę. Jej funkcją jest odseparowanie użytkownika od bezpośredniego dostępu do jądra systemu i umożliwienie   łatwej i wszechstronnej pracy. Podstawowym zadaniem powłoki jest przyjmowanie     poleceń użytkownika i uruchamianie stosownych programów. Do dalszych funkcji powłoki należy konstruowanie parametrów dla poleceń oraz zarządzanie sposobem wykonywania programów procesów. Następnym, bardziej skomplikowanym krokiem jest tworzenie   funkcji i procedur powłoki(skryptów) pozwalających   na łączenie wielu   poleceń  w   jedno,umożliwiając pisanie całych programów dla powłoki.Powłoka jest programem, z którym użytkownik systemu UNIX spotyka się na samym początku. Jej uruchomienie   następuje   automatycznie,bezpośrednio po zalogowaniu (zgłoszeniu) użytkownika w systemie. Gdy widzimy na ekranie znak ,,\$'',   oznacza   to,  że   powłoka   jest   już uruchomiona i oczekuje na podawanie poleceń. 
-
+\paragraph{Powłoka} (ang. shell) jest programem umożliwiającym pracę z systemem   UNIX. Jej nazwa wywodzi się z graficznej prezentacji systemu, w której jądro i procesy obsługi wejścia i wyjścia są otoczone właśnie przez powłokę. Jej funkcją jest odseparowanie użytkownika od bezpośredniego dostępu do jądra systemu i umożliwienie   łatwej i wszechstronnej pracy. Podstawowym zadaniem powłoki jest przyjmowanie     poleceń użytkownika i uruchamianie stosownych programów. Do dalszych funkcji powłoki należy konstruowanie parametrów dla poleceń oraz zarządzanie sposobem wykonywania programów procesów. Następnym, bardziej skomplikowanym krokiem jest tworzenie   funkcji i procedur powłoki(skryptów) pozwalających   na łączenie wielu   poleceń  w   jedno,umożliwiając pisanie całych programów dla powłoki.
 \paragraph{Powłoki UNIX}
 
 \subparagraph{Bourne shell (sh)}
 
 \begin{itemize}
-\item nie umożliwia ona operowania na liczbach całkowitych bez tworzenia nowego procesu,
-\item plikiem wykonywalnym powłoki na większości systemów Unix jest /bin/sh,
-\item  podstawowa powłoka w każdym systemie typu Unix.
+	\item nie umożliwia ona operowania na liczbach całkowitych bez tworzenia nowego procesu,
+	\item plikiem wykonywalnym powłoki na większości systemów Unix jest /bin/sh,
+	\item  podstawowa powłoka w każdym systemie typu Unix.
 \end{itemize}
 
 \subparagraph{Bash\\\\}
 W rozwinięciu Bourne-Again Shell (born again shell) - wywodzi się od powłoki Bourne'a sh i był pisany w 1987 r. Jest nadal rozwijany.
 \begin{itemize}
-\item umożliwia wykonanie obliczeń za pomocą wyrażeń w podwójnych nawiasach ((...)) oraz składni \$[...].
+	\item umożliwia wykonanie obliczeń za pomocą wyrażeń w podwójnych nawiasach ((...)) oraz składni \$[...].
 \end{itemize}
 
 \subparagraph{Korn shell (ksh)}
 \begin{itemize}
-\item kompatybilna wstecz z sh,
-\item zawiera wiele elementów z csh np. historię komend.
+	\item kompatybilna wstecz z sh,
+	\item zawiera wiele elementów z csh np. historię komend.
 \end{itemize}
 
 
 \subparagraph{C shell (csh)}
 \begin{itemize}
-\item o składni języka C,
-\item pochodzi od sh,
-\item ulepszenia: aliasy i historia komend,
-\item jej następcą jest tcsh,
-\item rzadko wykorzystywana.
+	\item o składni języka C,
+	\item pochodzi od sh,
+	\item ulepszenia: aliasy i historia komend,
+	\item jej następcą jest tcsh,
+	\item rzadko wykorzystywana.
 \end{itemize}
 
 \paragraph{Polecenia powłoki\\}
@@ -766,9 +767,161 @@ W rozwinięciu Bourne-Again Shell (born again shell) - wywodzi się od powłoki 
 Wydanie polecenia w powłoce wiąże się z podaniem ciągu znaków. Składa się z następujących elementów:
 \begin{center}\textbf{<nazwa polecenia> -<opcje> <parametry>}\end{center}
 
-Nazwą polecenia jest nazwa jakiegokolwiek programu, funkcji powłoki lub funkcji   wewnętrznej powłoki. Opcje to najczęściej zestaw pojedynczych liter określających     sposób wykonania programu. Parametry to informacje dla programu (funkcji) co   właściwie ma wykonać.
+Nazwą polecenia jest nazwa jakiegokolwiek programu, funkcji powłoki lub funkcji   wewnętrznej powłoki. Opcje to najczęściej zestaw pojedynczych liter określających     sposób wykonania programu. Parametry to informacje czego dotyczy wykonanie.
 
-\subsection{Programowanie w C}
+\subsection{Podstawowe mechanizmy}
+\subsubsection{Globbing\\}
+Mechanizm polegający na dopasowywaniea
+$*$ $?$ $[a-z A-Z_]$ do nazw plików.
+
+\subsubsection{Procesy i podprocesy\\}
+Wykonywanie programów powoduje utworzenie oddzielnego procesu, który jest podprocesem interpretera poleceń. Proces ma dostęp do standardowych urządzeń wejść i wyjść: stdin, stout, stderr, oraz środowiska, które jest zestawem zmiennych z przypisanymi wartościami.
+
+\subsubsection{Potoki\\}
+Potoki to równoległe uruchomienie dwóch lub więcej poleceń z szeregowym połączeniem ich wejść i wyjść.
+
+\subsubsection{Prawa dostępu\\}
+
+Mechanizm w systemach uniksowych, mający na celu umożliwić określenie uprawnień odczytu, edycji i uruchamiania dla poszczególnych użytkowników. Ma on na celu zapewnienie bezpieczeństwa, stabilności i kontroli prywatności w systemach wielodostępnych.
+Prawa dostępu przydzielane są dla kategorii: user,    group,  other.
+Dla każdej z tych kategorii możliwe są trzy prawa dostępu, opisane literowo (rwx) lub liczbowo trzema bitami: read, write, execute. 
+
+
+\subsubsection{Pisanie skryptów}
+
+Skrypty to pliki zawierające zestaw poleceń interpretera. Skrypt można uruchomić jawnie wywołując interpreter poleceń podając nazwę skryptu jako argument.
+
+
+\subsubsection{rozszerzenia POSIX}
+
+
+POSIX (ang. Portable Operating System Interface for Unix) – przenośny interfejs dla systemu operacyjnego Unix. Jest zbiorem norm, mających zestandaryzować cechy i interfejsy, które powinien mieć i zapewniać system UNIX. 
+Standaryzuje między innymi: operatory arytmetyczne, lokalizacje, klasy mechanizmu globbingu, polecenia zagnieżdżone.
+
+
+
+
+
+
+
+
+\subsection{Wyrażenia regularne: sed, awk, grep} 
+
+\subsubsection{sed}
+
+sed (od ang. stream editor) – edytor strumieniowy, służy do przetwarzania tekstu.
+Edytor sed
+wczytuje   bieżący   wiersz   pliku   do   wewnętrznego   bufora   celem
+manipulowania   tekstem.   Wynik   jest   wysyłany   na   standardowe   wyjście.
+Oryginalny plik nie jest nigdy zmieniany. 
+\\
+Składnia uruchamiania sed: sed 
+opcje 'polecenie' nazwa\_pliku
+Wybrane polecenia: wyświetlenie linii, opuszczenie pustych linii, zakończ, skasowanie linie, zapisanie linii do pliku.
+
+\subsubsection{awk}
+
+uniwersalny filtr programowalny. 
+\begin{itemize}
+	\item czyta wiersz z wejścia, dzieli na pola (słowa) dostępne jako:$1, $2, ...
+	\item wykonuje program składający się z par warunek - akcja.
+	\item par warunek-akcja może być wiele i w każdej może brakować warunku
+	(domyślnie: prawda) albo akcji (domyślnie: wyświetlenie wiersza
+	\item zmienne zachowują wartości pomiędzy wierszami
+	
+	Jego główną funkcją jest wyszukiwanie i przetwarzanie wzorców w plikach lub strumieniach danych.
+\end{itemize} 
+
+\subsubsection{grep}
+
+grep – program który służy do wyszukiwania w tekście i wyodrębniania linii zawierających ciąg znaków pasujący do podanego wyrażenia regularnego.\\
+
+użycie: \$ grep opcje wzorzec plik/pliki\\
+przykładowe opcje: \\
+-w – wyszukuje tylko całe słowa;\\
+-x – wyszukuje tylko całe linie;\\
+-c –  wyświetla liczbę znalezionych linii;
+
+
+\subsection{funkcje I/O niskiego poziomu, deskryptory, przegląd bibliotek systemu UNIX }
+
+\subsubsection{funkcje I/O niskiego poziomu}
+
+Funkcje open, read, write, zwane wbudowanym systemem we/wy niskiego poziomu, są głównym systemem operacji ma plikach i urządzeniach w Unixie.
+
+Odwołują się do otwartych plików przez numery deskryptorów.
+
+\subsubsection{Deskryptory}
+
+To małe liczby przyporządkowane kolejno otwieranym plikom. Programy uzyskują najniższy wolny deskryptor. Jesli inny proces otworzy ten sam plik otrzyma własny (inny lub ten sam) numer deskryptora. Operacja odczytu może przebiegać jednocześnie dla wielu procesów. Jeśli procesy otworzą jednocześnie plik do zapisu, nadpiszą się wzajemnie, konieczna jest synchronizacja w postaci blokad. 
+
+\subsubsection{przegląd bibliotek systemu UNIX}
+
+\begin{itemize}
+	\item stdio 
+	Działa podobnie jak operacje I/O niskiego poziomu
+	\item string 
+	\item crypt 
+	\item ndbm
+	tworzenie własnych baz danych dla dużej ilości danych i dużej przenoszalności 
+\end{itemize}
+
+\subsection{ Programowanie procesów: tworzenie, atrybuty, dziedziczenie atrybutów, współdzielenie zasobów. Sygnały, obsługa sygnałów. Komunikacja przez potoki. }
+
+\subsubsection{Programowanie procesów}
+Procesy mają: kod programu w pamięci, środowisko (zmienne i wartości), zestaw dalszych informacji np. tablicę otwartych plików, priorytet. \\
+\\
+Tworzenie procesów poprzez klonowanie istniejącego procesu funkcją fork() (procesy potomek i rodzic). Podproces dziedziczy lub współdzieli pewne atrybuty i zasoby procesu nadrzędego. Proces kończy pracę normalnie (funkcja exit() lub koniec main()) lub anormlanie (synał lub funkcja abort()).\\ 
+\\
+Przykładowe atrybuty procesu:  PID, PPID, UID, terminal, blokady, maska sygnałów, ograniczenia zasobów.
+
+\subsubsection{Sygnały, obsługa sygnałów.}
+
+Sygnały są mechanizmem asynchronicznego powiadamiania procesów o zdarzeniach. 
+
+Generuje je:
+\begin{itemize}
+	\item błędy i wyjątki sprzętowe
+	\item pewne klawisze terminala
+	\item funkcja kill
+	\item mechanizmy softwarowe
+\end{itemize}
+
+Reakcja procesu możliwa: ignorowanie, wywołanie funkcji, śmierć procesu.\\
+\\
+Tradycyjna obsługa procesów: zadeklarowanie innej niż domyślna obsługi sygnału ma charakter jednorazowy (zadziała inaczej tylko raz.
+
+\subsubsection{Komunikacja przez potoki}
+
+Potok to narzędzie szeregowej, jednokierunkowej komunikacji o własnościach:
+\begin{itemize}
+	\item Operacje odczytu i zapisu na potoku jak na zwykłym pliku
+	\item Dostępne jako dwa lub jeden deskryptor pliku (oddzielne dla końca zapisu i odczytu)
+	\item ma ograniczoną pojemność
+	\item jeśli pusty lub ponad pojemność, proces obsługi wisi i kontynuuje gdy to możliwe.
+	
+\end{itemize}
+
+\subsection{Komunikacja międzyprocesowa przez gniazdka, kolejki komunikatów, i pamięć wspólną, semafory}  
+
+\subsubsection{Komunikacja międzyprocesowa przez gniazdka}
+
+Gniazdka do deskryptory plików umożliwiające dwukierunkową komunikację w ramach jednego systemu lub przez sieć komputerową. Do korzystania z gniazdek potrzebne jest tworzenie struktury adresowej.Gniazda posiadają również port. Mogą działać jako klient serwer albo broadcast (do wszystkich w sieci).\\
+\\
+\subsubsection{kolejki komunikatów POSIX}
+Mają własności: 
+\begin{itemize}
+	\item Dwukierunkowe narzędzie komunikacji w jednym z trybów (O\_RDONLY, O\_WRONLY, O\_RDWR)
+	\item stały rozmiar komunikatu
+	\item nie przekazują komunikatu jako strumień bajtów, ale jako całe jednostki
+	\item komunikaty posiadają priorytety
+\end{itemize}
+
+
+\subsubsection{semafory}
+Semafor jest zmienną kontrolującą przydział danego zasobu. Semafor wykonuje dwie operacje. P - zajęcie zasobu sygnalizowanie zmniejszeniem wartości zmiennej o 1, V - zwolnienie zasobu, zwiększenie zmiennej o 1.
+
+Istnieją semafory system V IPC, oraz POSIX, choć te pierwsze są kłopotliwe w użyciu.
 
 \chapter{Komputer, architektura i oprogramowanie}
 \paragraph{Komputer} [ang. < łac. computare ‘rozważać’, ‘obliczyć’], elektroniczna maszyna cyfrowa, urządzenie elektroniczne przeznaczone do przetwarzania informacji (danych) przedstawionych w postaci cyfrowej, sterowane programem zapisanym w pamięci.
