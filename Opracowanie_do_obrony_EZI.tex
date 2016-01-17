@@ -540,6 +540,462 @@ Schemat z rysunku \ref{rys:warstwowy_model_OS}. przedstawia ogólną budowę sys
 
 \chapter{Zadania optymalizacji i techniki ich rozwiązywania}
 
+Optymalizacja - znalezienie wariantu ocenianego według danego kryterium jako najlepszy spośród wariantów uznanych za dopuszczalne.
+
+\subsection{Sformułowanie zadania optymalizacji}
+
+
+Wektor zmiennych decyzyjnych x:
+\[x=[x_1, x_2,...x_n]^T,\]
+gdzie:\\
+n - ilość zmiennych decyzyjnych.
+\\\\
+Funkcja celu (funkcja kryterialna) f(x):  
+\[f(x)~:~R^n \longrightarrow R^1\]
+oraz m funkcji ograniczeń $g_i(x)$:
+\[g_i(x): R^n \longrightarrow R^1~~dla~i=1,...,m\]
+
+Zadanie optymalizacji polega na znalezieniu wektora zmiennych decyzyjnych 
+x, należącego do zbioru rozwiązań dopuszczalnych \textbf{X} w postaci:
+\[X = {x|g_i(x) \le 0,~~i=1,...,m}\]
+takiego, że dla wszystkich $x \in X$
+\[f(\hat{x})<= f(x).\]
+Co jest równoznaczne zapisowi:
+\[min_{x \in X} f(x) = f(\hat{x}).\]
+
+
+\begin{figure}[H]
+	\includegraphics[scale=1.2
+	]{obrazy/optymalizacja/opt1.png}
+\end{figure}
+D - zbiory dopuszczalne.\\
+\\
+
+
+PO POLSKU: \\
+
+Sformułowanie zadania optymalizacji polega na znalezieniu takiego zestawu wielkości zmiennych (z wektora zmiennych decyzyjnych), że będzie spełniał podane ograniczenia (na przykład że nie mogą być wartości ujemne), czyli należał do zbioru dopuszczalnego, oraz że będzie to rozwiązanie najlepsze według podanego kryterium, czyli funkcji celu (najmniejsze, największe, itp). Może też okazać się , że zadanie nie posiada rozwiązania , bądź też posiada nieskończenie wiele rozwiązań optymalnych. \\
+
+
+Przypomnienie czym są ekstrema lokalne i globalne:
+
+\begin{figure}[H]
+	\includegraphics[scale=1.2
+	]{obrazy/optymalizacja/opt2.png}
+\end{figure}
+
+\subsubsection{Klasyfikacja zadań}
+Ze względu na ograniczenia:
+\begin{itemize}
+	\item Zadania bez ograniczeń (dopuszczalne wszystkie warianty)
+	\item Zadania z ograniczeniami (określono w zadaniu zbiór wartości dopuszczalnych)
+\end{itemize}
+Ze względu na postać:
+\begin{itemize}
+	\item Zadania liniowe - oznacza że funkcja celu oraz układ ograniczeń są liniowe
+	\item Zadania nieliniowe 
+\end{itemize}
+Inne podziały: 
+\begin{itemize}
+	\item metody rozwiązania: numeryczne/analityczne
+	\item ze względu na liczbę funkcji celu :
+	a) zadania jednokryterialne (skalarna funkcja celu)/
+	zadania wielokryterialne (więcej niż jedno kryterium  funkcja celu wektorowa)
+	\item ze względu na tym zmiennych decyzyjnych: całkowitoliczbowe/zerojedynkowe/mieszane
+	\item kilka innych 
+\end{itemize}
+
+Najważniejszy podział to na zadanie liniowe lub nieliniowe, ponieważ zadanie nie może należeń jednocześnie do obu tych klas, co nie dotyczy pozostałych podziałów, np, możliwe jest zadanie bez ograniczeń nieliniowe. 
+
+
+\subsection{Zadanie programowania liniowego PL} 
+
+Dobrze wytłumaczone zadanie programowanie liniowe:\\
+\url{http://www.cs.put.poznan.pl/jjozefowska/wyklady/bo/Rozdzial3.pdf}
+Warto przeanalizować przykład z kawą, wtedy wszystko jest jaśniejsze. 
+
+
+\begin{figure}[H]
+	\includegraphics[scale=1
+	]{obrazy/optymalizacja/opt3.png}
+\end{figure}
+
+
+Przypadki szczególne rozwiązania zadania programowania liniowego
+(PL)
+
+\begin{itemize}
+	\item Istnieje jedno rozwiązanie optymalne zadani PL.
+	\item Zadanie PL jest zadaniem nieograniczonym – brak rozwiązania.
+	\item W zadaniu PL zbiór rozwiązań dopuszczalnych jest pusty – brak
+	rozwiązania.
+	\item W zadaniu PL wszystkie zmienne lub ich część przyjmuje
+	\item wartości rzeczywiste.
+	\item Zadanie PL posiada nieskończoną liczbę rozwiązań.
+\end{itemize}
+
+\subparagraph{Metody rozwiązywania:}
+\begin{itemize}
+	\item simpleks
+	\item dwufazowy simpleks
+	\item dualny simpleks
+	\item metoda graficzna
+\end{itemize} 
+
+
+
+\subsubsection{Metoda simpleks}  
+
+Algorytm simpleks wymaga sprowadzenia zadania PL do postaci standardowej, w której ograniczenia mają postać równań, wszystkie zmienne są nieujemne, a także prawe strony ograniczeń są liczbami nieujemnymi. Czasem wymaga to dodania do macierzy pomocniczych zmiennych (w przypadku ograniczeń mniejszościowych lub większościowych).
+
+
+Przyjmując m - liczba ograniczeń, n - liczba zmiennych decyzyjnych. \\
+Obliczenia simpleks wygodnie jest prowadzić w tablicy, która reprezentuje bazowe rozwiązanie dopuszczalne. Ma m+1 wierszy i n kolumn. Kolumny to zmienne decyzyjne, wiersze odpowiadają zmiennym bazowym. \\
+
+\begin{enumerate}
+	\item  tworzy się postać początkową tablicy simpleks zawierającą rozwiązanie dopuszczalne. Jeśli dopuszczalne, następny krok.
+	\item Test optymalności (czy współczynniki w wierszu x0 są dodatnie?) jesli tak, to jest rozwiązanie, jeśli nie - następny krok. 
+	\item Wybór zmiennej wchodzącej do bazy (najmniejsza wartość w wierszu x0)
+	\item wybór zmiennej usuwanej z bazy
+	\item Eliminacja Gaussa w celu uzyskania nowego rozwiązania bazowego dopuszczalnego. Powrót do kroku 1. 
+\end{enumerate}
+
+Tutaj jest rozwiązany przykład na str 3., warto to przejrzeć i samemu zrozumieć. 
+\url{http://staff.iiar.pwr.wroc.pl/ewa.szlachcic/materialy\%20dydaktyczne/eit%20technika%20optymalizacji/4w_to_proglin2.pdf}
+	
+	\subsubsection{Metoda graficzna}  
+	
+	Jest najprostsza, ale można ją zastosować jedynie do zadań o dwóch zmiennych decyzyjnych. 
+	
+	\begin{figure}[H]
+		\includegraphics[scale=0.7
+		]{obrazy/optymalizacja/opt4.png}
+	\end{figure} 
+	
+	Rysujemy ograniczenia, zaznaczamy zbiór dopuszczalny, rysujemy funkcję celu i wybieramy najlepszy punkt optycznie.
+	
+	
+	\subsubsection{Metoda simpleksu dwufazowego}
+	
+	Ma dwie fazy:
+	\begin{enumerate}
+		\item należy znaleźć pierwsze rozwiązanie bazowe    dopuszczalne poprzez rozwiązanie zadania pomocniczego (wprowadzenie pomocniczej funkcji celu.)
+		\item maksymalizacja funkcji celu x0 dla następnego rozwiązania bazowego dopuszczalnego wg algorytmu simpleks.
+	\end{enumerate}
+	
+	I faza zachodzi, gdy Krok 1 – nie ma możliwości stworzenia pierwszego rozwiązania bazowego dopuszczalnego. 
+	
+	\begin{figure}[H]
+		\includegraphics[scale=0.7
+		]{obrazy/optymalizacja/opt5.png}
+	\end{figure} 
+	
+	Po tej fazie następuje II faza, czyli podstawowy simpleks (prymalny).\\
+	
+	Szczególny przypadek jest wtedy, gdy po I fazie nadal nie ma rozwiązania dopuszczalnego. Wtedy brak rozwiązań.\\
+	\\
+	przykład:\\
+	\url{http://staff.iiar.pwr.wroc.pl/ewa.szlachcic/materialy%20dydaktyczne/eit%20technika%20optymalizacji/5w_to_proglin3.pdf}
+		\\
+		
+		W tym  miejscu, wszem i wobec oddaję honor pani dziekan, ponieważ jej przykłady obliczeniowe(!) są czytelne i łatwe do zrozumienia, w przeciwieństwie do internetowych, amen.
+		
+		\paragraph{Zadanie liniowego programowania całkowitoliczbowego PCL\\\\}
+		
+		Zagadnieniem liniowym całkowitoliczbowym nazywamy zadanie optymalizacji
+		liniowej, w którym wszystkie zmienne lub ich część są liczbami całkowitymi.
+		
+		\[max_{x \in X} x_0 = c^Tx~~dla~x \in X \subset R^n\]
+		
+		
+		dla każdego $$1 \le i \le t~~~x_i \in \mathbb{Z}$$
+		
+		Metody uproszczone:
+		\begin{itemize}
+			\item Przegląd zupełny zbioru rozwiązań dopuszczalnych X
+			\item Zaokrąglenie rozwiązania optymalnego zadania PL do zmiennych całkowitych
+			
+			Zaokrąglenie do części całkowitych rozwiązania optymalnego zadania PL w 
+			celu zyskania rozwiązania zadania PCL
+			W ten sposób można uzyskać rozwiązanie PCL nie spełniające zbioru 
+			rozwiązań dopuszczalnych X.
+			Należy sprawdzić miarę niedopuszczalności rozwiązania zaokrąglonego 
+			mierząc procentowe niespełnienie ograniczeń.
+		\end{itemize}
+		
+		Metody złożone:
+		\begin{itemize}
+			\item Metoda odcięć Gomory'ego
+			
+			\begin{enumerate}
+				\item Krok 1
+				Znajdź rozwiązanie zadania PL  (2). Idź do Kroku 2.
+				\item Krok 2
+				Test na optymalność\\
+				Jeśli rozwiązanie zadania jest całkowitoliczbowe , 
+				wówczas jest ono 
+				jednocześnie rozwiązaniem zadania (1) – Stop. 
+				W przeciwnym wypadku idź do Kroku 3.
+				\item Krok 3
+				Odcinanie \\
+				Dodaj odcięcie z odpowiednio dobraną wartością h. Dokonaj ponownej optymalizacji stosując algorytm simpleks. Może zaistnieć konieczność wykonania większej liczby kroków eliminacji, zgodnie z procedurą simpleks. 
+				Wróć do Kroku 2.
+			\end{enumerate}
+			
+			Odcięciem Gomoryego nazywamy więc ograniczenie obszaru dopuszczalnego półprzestrzenią :
+			
+			\begin{figure}[H]
+				\includegraphics[scale=1
+				]{obrazy/optymalizacja/opt6.png}
+			\end{figure} 
+			
+			
+			\item Metoda podziału i ograniczeń \\
+			Podstawą metody B\&B jest przegląd drzewa rozwiązań.
+			Wykorzystuje się fakt skończoności zbioru możliwych 
+			wartości 
+			zmiennych całkowitoliczbowych w przypadku ograniczonych zadań
+			PCL.
+			
+			W każdym wierzchołku drzewa rozwiązuje się problem programowania 
+			liniowego z dodatkowym ograniczeniem na wybraną zmienną. 
+			Warunek całkowitoliczbowości zmiennych zostaje odrzucony.
+			\item Metody przybliżone = metody heurystyczne
+		\end{itemize}
+		
+		
+		
+		
+		
+		
+		
+		\subsection{Zadanie programowania nieliniowego PN}
+		
+		$$min_{x \in X} f(x) = f(\hat{x})$$
+		przy ograniczeniach:
+		$$X={x|g_i(x)=<0, i=1,...,m|}$$ 
+		\\
+		Zadanie programowania nieliniowego polega na znalezieniu wektora zmiennych decyzyjnych $\hat{x}$, należącego do zbiory rozwiązań dopuszczalnych \textbf{X} w postaci: 
+		
+		takiego, że dla
+		
+		$$x \in X$$
+		
+		$$f(\hat{x})=<f(x)$$
+		
+		Przeważnie stosuje się metody przybliżone, tylko szczególne przypadki można rozwiązać analitycznie, na przykład sprowadzając do problemu liniowego. Metoda rozwiązywania zależy od postaci, jaką przyjmuje zadanie, nie ma uniwersalnej.
+		
+		\begin{figure}[H]
+			\includegraphics[scale=0.3
+			]{obrazy/optymalizacja/opt8.png}
+		\end{figure} 
+		
+		\begin{figure}[H]
+			\includegraphics[scale=0.3
+			]{obrazy/optymalizacja/opt7.png}
+		\end{figure} 
+		
+		\begin{figure}[H]
+			\includegraphics[scale=0.5
+			]{obrazy/optymalizacja/opt9.png}
+		\end{figure} 
+		
+		
+		
+		
+		\paragraph{Nieliniowe zadanie optymalizacji statycznej z ograniczeniami\\\\}
+		Znaleźć wektor rozwiązań optymalnych $\hat{x}, taki, że:$
+		
+		$$f(\hat{x})=min_{x \in X}f(x)$$
+		
+		gdzie:
+		
+		$$X={x:g_i(x) \le 0,~~i=1,...,m}$$
+		
+		$$f:X = R^n \longrightarrow R^1$$
+		
+		oraz $$g_i:X = R^n \longrightarrow R^1~dla~każdego~i=1,...,m$$
+		
+		\subparagraph{Ograniczenie aktywne\\\\}
+		
+		Ograniczenie nierównościowe, spełnione równościowo nazywa się ograniczeniem aktywnym.\\
+		Dla $\hat{x}$ ograniczenie przyjmuje postać:
+		\[  g_i(\hat{x})=0 \]
+		
+		
+		$$ g_i(\hat{x}+\tau d) \le 0, dla każdego i \in A(\hat{x})$$
+		
+		przy czym $\tau \in [0,\sigma]$
+		
+		
+		
+		\subparagraph{Przypadki:}
+		
+		\begin{enumerate}
+			
+			\item Jedno ograniczenie aktywne – rozwiązanie optymalne na brzegu ograniczenia
+			aktywnego.
+			\item Wszystkie ograniczenia aktywne - rozwiązanie optymalne na przecięciu ograniczeń
+			aktywnych.
+			\item Brak ograniczeń aktywnych – rozwiązanie optymalne wewnątrz obszaru rozwiązań
+			dopuszczalnych ( rozwiązanie optymalne zadania bez ograniczeń spełnia
+			ograniczenia problemu.
+			
+		\end{enumerate}
+		
+		W celu uwzględnienia ograniczeń można postąpić w poniższy sposób:\\
+		• dokonać transformacji zmiennych decyzyjnych
+		• dokonać transformacji funkcji celu wprowadzając funkcje kary\\
+		
+		Funkcja kary charakteryzuje się tym, że w zbiorze rozwiązań dopuszczalnych X przyjmuje wartość równą zeru lub bliską zeru, a poza tym obszarem przyjmuje bardzo duże wartości.\\
+		
+		Rodzaje funkcji kary:
+		\begin{itemize}
+			\item Metody zewnętrznej funkcji kary (metoda Couranta,
+			metoda 
+			Schmita i Foxa)
+			\item Metody wewnętrznej funkcji kary (metoda Rosenbroc
+			ka, 
+			metoda Carolla)
+			\item Metody przesuwanej funkcji kary (metoda Powella).
+		\end{itemize}
+		
+		Rozwiązanie zadania nieliniowego z ograniczeniami oznacza znalezienie takiego wektora rozwiązań optymalnych,  że będzie on spełniał kryteria (to co w Matlabie było Tolx, TolCon...).
+		
+		
+		\subparagraph{Iteracyjne algorytmy optymalizacji:}
+		\begin{itemize}
+			\item Algorytmy optymalizacji w kierunku
+			\item Algorytmy optymalizacji bez ograniczeń
+			\item Algorytmy optymalizacji z ograniczeniami
+		\end{itemize}
+		Algorytm optymalizacji lokalnej (czyli to co wyżej) - przemierzanie obszaru rozwiązań dopuszczalnych w poszukiwaniu ekstremum funkcji celu według iteracyjnego schematu.
+		
+		\subparagraph{Algorytmy bezgradientowe (minimalizacja w kierunku -wykorzystują tylko wartości funkcji)}
+		\begin{itemize}
+			\item Algorytm Nelder’a-Meade’a ( Matlab - funkcja fminsearch)
+			\item Algorytm Gauss’a-Seidla (bardzo wolna zbieżność
+			liniowa)
+			\item Algorytm Powella 
+			\item złotego podziału
+			
+			\begin{figure}[H]
+				\includegraphics[scale=0.5
+				]{obrazy/optymalizacja/opt10.png}
+			\end{figure} 
+			\item aproksymacji kwadratowej
+		\end{itemize}
+		
+		\subparagraph{Algorytmy gradientowe(minimalizacja w kierunku - wykorzystują wartości funkcji oraz co najmniej wartość pochodnej 
+			kierunkowej w kierunku poszukiwań):}
+		\begin{itemize}
+			\item Algorytm największego spadku (zbieżność liniowa)
+			\item Algorytm Newtona (zbieżna
+			kwadratowo ale kosztowna i 
+			nie zawsze stabilna)
+			\item Algorytm Zangwilla
+			\item Algorytm Fletchera-Reeves’a
+			\item Algorytm Polaka-Ribiery
+			\item Algorytm Fletchera-Powella-Davidona
+		\end{itemize}
+		
+		
+		Najefektywniejsze są tzw. metody quasi'newtonowskie, w
+		których w kolejnych iteracjach konstruuje się przybliżenie odwrotności hesjanu.  
+		
+		
+		Przykłady metod quasinewtonowskich:
+		\begin{itemize}
+			\item Metoda Broyden-Fletcher-Goldfarb-Shanno (BFGS)\\
+			Właściwości metody:
+			-Brak operacji odwracania macierzy hesjanu\\
+			-Blisko rozwiązania optymalnego – dobra zbieżność\\
+			-Na początku obliczeń – zbieżność słaba – słabe jest przybliżenie hesjanu\\
+			-Przybliżenie hesjanu w każdej iteracji polepsza się
+		\end{itemize}
+		
+		
+		\url{chmielowski.eu/POLITECHNIKA/Dydaktyka/OPTYdoktoranci/Wyklady/W1.doc}\\
+		\url{smurf.mimuw.edu.pl/external_slides/MO/MO_1_Przyklady_zadan_optymalizacji/MO_1_Przyklady_zadan_optymalizacji.html}
+		
+		
+		\subsection{Optymalizacja globalna}
+		
+		Do tej grupy nalezą stochastyczne iteracyjne algorytmy 
+		przeszukiwania przestrzeni rozwiązań :\\
+		•metody przeszukiwania lokalnego\\
+		•metody przeszukiwania populacyjnego.\\
+		
+		SCHEMAT ALGORYTMU:
+		\begin{enumerate}
+			\item Wygeneruj początkowy zbiór rozwiązań W i oceń każde
+			z nich.
+			\item  Wygeneruj i oceń zbiór nowych kandydatów W’ drogą losowych 
+			zmian u wybranych osobników z W.
+			\item Zastąp pewne osobniki z W osobnikami z W’ i wróć do kroku 2, o ile nie jest spełniony warunek zatrzymania algorytmu.
+			
+			Są dwie metody generowania nowych osobników:
+			\begin{itemize}
+				\item Kolejni kandydaci są niewielkimi modyfikacjami po
+				przednich 
+				kandydatów (mutacja). dotyczy metod przeszukiwania lokalnego.
+				\item . Nowy kandydat powstaje w drodze rekombinacji pewnych cech 
+				dwóch lub więcej poprzedników (krzyżowanie). Dotyczy przeszukiwania populacyjnego
+			\end{itemize}
+			
+			\begin{figure}[H]
+				\includegraphics[scale=0.3
+				]{obrazy/optymalizacja/opt11.png}
+			\end{figure} 
+			
+			\subsubsection{Techniki heurystyczne}
+			
+			Algorytmy lokalnego poszukiwania – klasa algorytmów, w których rozwiązanie problemu jest 
+			iteracyjne poprawiane poprzez przeglądanie sąsiedztwa rozwiązania.
+		\end{enumerate}
+		
+		Metaheurystyki (naśladowanie rzeczywistości):\\
+		\begin{itemize}
+			\item symulowanie wyżarzanie \\
+			Na początku działania algorytmu temperatura (patametr) jest wysoka, dzięki czemu
+			algorytm może bardzo często zmieniać konfigurację rozwiązania,
+			niejednokrotnie wybierając rozwiązanie gorsze. Wraz z kolejnymi
+			iteracjami algorytmu temperatura spada i wybierane są częściej
+			rozwiązania lepsze. Pod koniec pracy algorytmu, temperatura jest na tyle
+			niska, że prawdopodobieństwo wyboru gorszego rozwiązania jest bliskie
+			zeru. Algorytm zachowuje się wówczas, jak typowy algorytm iteracyjny i
+			stara się maksymalnie ulepszyć rozwiązanie.
+			
+			\item przeszukiwanie TABU\\
+			Jest to metoda pozwalająca uniknąć niebezpieczeństwa
+			wielokrotnego powracania do tego samego rozwiązania.
+			
+			Algorytm jest wyposażony w pamięć dotychczas odwiedzanych 
+			punktów.
+			
+			Ponowne odwiedzenie punktów znajdujących się w pamięci tabu 
+			jest zakazane.
+			\item systemy mrówkowe
+			
+			W prawdziwym  świecie, mrówki poruszają się w sposób losowy; gdy znajdują pożywienie,  wracają do swojej kolonii pozostawiając ślad składający się z feromonów. Gdy inna mrówka  natknie  się na ten ślad, przestaje  poruszać się w sposób losowy i  podąża za śladem w  kierunku pożywienia. Gdy mrówki odnajdujące najbliżej położony pokarm wracają szybciej  zostawiają szybciej  feromony  i  jest  ich  coraz  więcej, gdyż reszta podąża za częstszym  zapachem. W ten sposób na koniec większość mrówek chodzi drogą najkrótszą.  
+			
+			\item algorytmy ewolucyjne
+			Idea algorytmów genetycznych polega na naśladowaniu ewolucji gatunków. Podczas iteracji  kod genetyczny czyli chromosomy ulegają krzyżowaniu lub selekcji tworząc w ten sposób  potomstwo, mogą one również podlegać mutacji z pewnym prawdopodobieństwem.  Algorytmy genetyczne umożliwiają utrzymanie równowagi pomiędzy szerokim badaniem  przestrzeni a wykorzystaniem wcześniejszych wyników. W każdej następnej populacji znajdą  się osobniki lepsze, zgodnie z funkcją celu. Osobniki gorsze podlegaj ą eliminacji.
+			
+			\item optymalizacja rojem cząstek 
+			Każda cząstka reprezentuje potencjalne rozwiązanie.
+			Cząstki poruszają się przez wielowymiarową przestrzeń
+			poszukiwań.
+			Pozycja jest aktualizowana według własnego doświadczenia oraz doświadczenia sąsiadów, poprzez dodanie wektora
+			prędkości do ich aktualnego stanu przemieszczania się.
+			Aktualna prędkość zależy od, poprzedniej prędkości, dążenia do swojego najlepszego poprzedniego położenia oraz dążenia do globalnego lub lokalnego najlepszego wyniku sąsiada.
+			Każda cząstka jest zbieżna do punktu pomiędzy własnym
+			najlepszym rozwiązaniem a najlepszym rozwiązaniem
+			globalnym.
+			
+			
+		\end{itemize}
+
 \subsection{Sformułowanie zadania optymalizacji}
 
 
