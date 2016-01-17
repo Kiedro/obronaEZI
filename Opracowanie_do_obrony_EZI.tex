@@ -1645,11 +1645,11 @@ V(x) = E[X - E(X)]^2 = E(X^2)-E(X)^2
 
 \chapter{Ciągła, dyskretna i szybka transformata Fouriera, widmo sygnału}
 \paragraph{Ogólnie}
- W dziedzinie przetwarzania sygnałów \textbf{transformacja} Fouriera używana jest do przetworzenia funkcji x(t) ciągłej lub dyskretnej w dziedzinie czasu na funkcję X(s) ciągłą lub dyskretną w dziedzinie częstotliwości. Ocena wyrażenia X(s) pozwala określić zawartość częstotliwościową dowolnego sygnału. 
+W dziedzinie przetwarzania sygnałów \textbf{transformacja} Fouriera używana jest do przetworzenia funkcji x(t) ciągłej lub dyskretnej w dziedzinie czasu na funkcję X(s) ciągłą lub dyskretną w dziedzinie częstotliwości. Ocena wyrażenia X(s) pozwala określić zawartość częstotliwościową dowolnego sygnału. 
 
 \section{Ciągła transformata Fouriera}
 \paragraph{Transformata Fouriera}
- - wynik operatora liniowego (czyli jednorodny [$ cf(x) = f(cx) $] i addytywny [$ f(a+b)=f(a)+f(b) $] ) jakim jest \textbf{transformacja} Fouriera. Dzięki liniowości możemy transformować sygnały rzeczywiste, w innym przypadku byłyby to jedynie sygnały zawierające pojedynczy przebieg sinusoidalny.
+- wynik operatora liniowego (czyli jednorodny [$ cf(x) = f(cx) $] i addytywny [$ f(a+b)=f(a)+f(b) $] ) jakim jest \textbf{transformacja} Fouriera. Dzięki liniowości możemy transformować sygnały rzeczywiste, w innym przypadku byłyby to jedynie sygnały zawierające pojedynczy przebieg sinusoidalny.
 
 Dla funkcji f(x) transformatę Fouriera definiujemy następująco:
 $$ F(s) = \int\limits_{-\infty}^{+\infty} f(x)\ e^{- 2\pi i x s}\,dx, $$
@@ -1665,7 +1665,7 @@ $$ X(m)= \sum_{n=0}^{N-1}{x(n) e^{- \frac{2 \pi i n m}{N}}} , \ 0 \le k \le N-1 
 gdzie x(n) to dyskretny ciąg wartości ciągłej zmiennej x(t), spróbkowanej w dziedzinie czasu, 
 
 N – liczba próbek wejściowych w dziedzinie czasu. \\
- DFT wyznacza zawartość widmową sygnału wejściowego w N równomiernie rozłożonych punktach na osi częstotliwości. N określa ile próbek wejściowych jest wymaganych do policzenia DFT, jaka jest rozdzielczość wyników w dziedzinie częstotliwości (odległość pomiędzy prążkami w Hz) oraz jaki jest czas przetwarzania wymagany do obliczenia N-punktowej DFT. Ze wzoru na DFT wynika bowiem, iż złożoność obliczeniowa algorytmu wynosi $ O(n^2) $ ( to dużo).
+DFT wyznacza zawartość widmową sygnału wejściowego w N równomiernie rozłożonych punktach na osi częstotliwości. N określa ile próbek wejściowych jest wymaganych do policzenia DFT, jaka jest rozdzielczość wyników w dziedzinie częstotliwości (odległość pomiędzy prążkami w Hz) oraz jaki jest czas przetwarzania wymagany do obliczenia N-punktowej DFT. Ze wzoru na DFT wynika bowiem, iż złożoność obliczeniowa algorytmu wynosi $ O(N^2) $ ( to dużo).
 
 \paragraph{DFT}
 \begin{itemize}
@@ -1674,8 +1674,8 @@ N – liczba próbek wejściowych w dziedzinie czasu. \\
 	\item Wyjściowe wartości amplitud prążków DFT są równe amplitudzie wejściowej danej składowej (sinusoidy) * N/2.
 	\item jeżeli ciąg wejściowy $ x(n) $ jest rzeczywisty, to zespolone wartości wyjściowe DFT dla argumentów $ m >= (N/2) $ są nadmiarowe w stosunku do wartości wyjściowych dla argumentów od $ m = 0 $ do $ m = (N/2)-1 $. \textit{m}-ta wartość wyjściowa DFT będzie miała taką samą amplitudę jak $(N-m)$-ta wartość wyjściowa DFT. Kąt fazowy $m$-tej wartości będzie równy kątowi fazowemu $(N-m)$-tej wartości wyjściowej DFT, ze znakiem ujemnym. \\
 	Jeżeli ciąg wyjściowy DFT jest rzeczywisty, to $X(m)$ jest sprzężeniem $X(Nm)$, lub:
-$$ X(m) = X^*(N-m) $$
-gdzie $ ^* $ oznacza sprzężenie.
+	$$ X(m) = X^*(N-m) $$
+	gdzie $ ^* $ oznacza sprzężenie.
 \end{itemize}
 
 Podsumowanie:
@@ -1705,8 +1705,10 @@ Jeżeli sygnał wejściowy zawiera częstotliwość która nie należy do częst
 
 Łopatologicznie: 8 punktowa DFT przy próbkowaniu 8000Hz daje prążki w punktach 0Hz, 1000Hz, 2000Hz… 7000Hz, jak sygnał wejściowy ma składową 1500Hz to ta „rozlewa” się na wszystkie prążki. 
 \paragraph{Przeciek}
- jest nie do uniknięcia przy wyznaczaniu DFT rzeczywistego ciągu czasowego o skończonej długości.
+jest nie do uniknięcia przy wyznaczaniu DFT rzeczywistego ciągu czasowego o skończonej długości.
 W celu zminimalizowania skutków przecieku można użyć funkcji okna (jednego z miliona) na wartościach wejściowego ciągu czasowego.
+Przeciek widma powodowany jest poprzez spróbkowanie sygnału o niepełnej liczbie cykli. Wtedy na początku i końcu przedziału próbkowania mogą powstać nieciągłości, które w DFT objawią się istnieniem wysokich składowych (których nie było w sygnale wejściowym) - nieciągłości te tworzą listki boczne sygnału spróbkowanego. Jest to bowiem próbkowanie z użyciem okna prostokątnego. Poprzez zastosowanie innych okien minimalizowane są nieciągłości w punktach końcowych przedziału próbkowania, co w efekcie minimalizuje przeciek widma.
+
 Jak polepszyć rozdzielczość DFT? Zwiększyć N, nawet gdy nie mamy więcej próbek, to zawsze można dodać zera i liczyć dla takiego sygnału. 
 Poprawa rozdzielczości DFT poprzez uzupełnianie zerami.
 
@@ -1716,9 +1718,9 @@ Z wielu zaproponowanych algorytmów najpopularniejszym jest algorytm FFT o podst
 
 Zaleta FFT o podstawie 2 i metody wykorzystania:
 \begin{itemize}
-	\item Redukcja ilości mnożeń z N2 do około N/2*log2N, dla N = 512 to 200 razy mniej mnożeń zespolonych, dla N = 8192 redukcja 1000 krotna. 
+	\item Redukcja ilości mnożeń z $ N^2 $ do około $ N/2*\log_2 N $ , dla N = 512 to 200 razy mniej mnożeń zespolonych, dla N = 8192 redukcja 1000 krotna. 
 	\item FFT nie przybliża DFT, ale daje dokładny wynik DFT, z zachowaniem wszystkich właściwości DFT! 
-	\item Jeżeli nie mamy wpływu na ilość pobieranych próbek, a nie jest to liczba N2 to należy dodać zera do najbliższej potęgi 2, nigdy nie obcinać.
+	\item Jeżeli nie mamy wpływu na ilość pobieranych próbek, a nie jest to liczba bedąca potęgą 2, to należy dodać zera do najbliższej potęgi 2, nigdy nie obcinać.
 	\item Poprawianie wyników FFT - do wykrycia sygnałów w obecności szumu, można wykorzystać uśrednianie kolejnych procedur FFT
 \end{itemize}
 
@@ -1736,7 +1738,8 @@ X(m) – ciąg widmowy X zmiennej m
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.7]{obrazy/fourier/widmo.png}
-	\caption{Wynik DFT dla sygnału o częstotliwości 3.4 okresów w analizowanym oknie 64 próbek. }
+	\caption{Widma różnych sygnałów. Proszę zwrócić uwagę na liniowość operacji DFT. 
+		$ f_0 $ - częstotliwość podstawowa prażków = $ \frac{f_s}{N} $ }
 \end{figure}
 
 \paragraph{Widmo} - przedstawienie sygnału w dziedzinie częstotliwości lub pulsacji, otrzymane przy pomocy transformacji Fouriera.
