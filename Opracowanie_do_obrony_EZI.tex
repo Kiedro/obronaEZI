@@ -352,22 +352,22 @@ Zapewnia to 24-bitową głębie kolorów (3 kanały po 8 bitów), tzn. pozwala r
 4 kanałem często używanym np. w formacie png może być kanał A \textit{Alpha} odpowiadający za (nie)-przeźroczystość.
 
 \section{Algorytmy przetwarzania obrazów}
-Pojęcie \textbf{przetwarzania obrazów} można rozumieć rozmaicie. W wąskim sensie oznacza operacje, które przetwarzają jedne obrazy w inne - zarówno dane wejściowe jak i wyjściowe mają formę obrazu. W tym sensie zawierają się:
+Pojęcie \textbf{przetwarzania obrazów} można rozumieć dwojako. W wąskim sensie oznacza operacje, które przetwarzają jedne obrazy w inne - zarówno dane wejściowe jak i wyjściowe mają formę obrazu. W tym sensie zawierają się:
 \begin{itemize}
 	\item akwizycja obrazów - wprowadzenie obrazów, zwłaszcza cyfrowych do systemów technicznych (sorki, brzydka definicja),
 	\item reprezentacja obrazu i modelowanie - dobór reprezentacji obrazu w systemie tech., by odpowiadała ona charakterowi obrazu i przeznaczeniu reprezentacji, również modele matematyczne obrazów. Głębia, przestrzeń barw
 	\item polepszanie obrazów - wytwarzanie obrazów subiektywnie ocenianych przez człowieka jako lepsze
 	\item odzyskiwanie, restauracja obrazów - usuwanie zniekształceń (geometrycznych), zakłóceń (szumy, rozmycia)
-	\item kompresja obrazów - oczywiste
+	\item kompresja obrazów - bezstratna jak i stratna
 	\item znakowanie wodne - umieszczanie i odczytywanie dodatkowych, często niewidocznych informacji
 	\item prezentacja, wyświetlanie obrazów
 \end{itemize}
 	
 	Z tego punktu widzenia grafika komputerowa, animacje komputerowe stanowią oddzielną grupę metod.
 	
-	W szerszym sensie do przetwarzania obrazów zalicza się \textbf{analizę obrazów}, w której dane wejściowe odpowiadają obrazom, natomiast dane wyjściowe mają inny charakter. A analizą obrazów związane jest \textbf{rozpoznawanie wzorców} którego celem jest identyfikacja pewnych struktur w obrazach.
+	W szerszym sensie do przetwarzania obrazów zalicza się \textbf{analizę obrazów}, w której dane wejściowe odpowiadają obrazom, natomiast dane wyjściowe mają inny charakter. Z analizą obrazów związane jest \textbf{rozpoznawanie wzorców} którego celem jest identyfikacja pewnych struktur w obrazach.
 	
-	3 kategorię metod przetwarzania stanowi \textbf{analiza obrazów}:
+	Trzecią kategorię metod przetwarzania stanowi \textbf{analiza obrazów}:
 \begin{itemize}
 	\item analiza ogólnych cech obrazu lub jego fragmentu - np. analiza cech ilościowych wartości pikseli, barwy punktów
 	\item ekstrakcja cech - np. krawędzi, struktur geometrycznych
@@ -1330,8 +1330,11 @@ Gdyby ktoś potrzebował większego przypomnienia z kryteriów : http://home.agh
 + warto przypomnieć sobie rozwiązywanie równań różniczkowych
 
 
-\chapter{Programowanie w systemie operacyjnym Unix}
 \section{Interpreter komend Bourne shell, podstawowe mechanizmy, pisanie skryptów, rozszerzenia POSIX }
+
+
+
+
 
 \subsection{Programowanie w języku powłoki}
 
@@ -1528,6 +1531,51 @@ Mają własności:
 Semafor jest zmienną kontrolującą przydział danego zasobu. Semafor wykonuje dwie operacje. P - zajęcie zasobu sygnalizowanie zmniejszeniem wartości zmiennej o 1, V - zwolnienie zasobu, zwiększenie zmiennej o 1.
 
 Istnieją semafory system V IPC, oraz POSIX, choć te pierwsze są kłopotliwe w użyciu.
+
+\subsection{Programowanie w C}
+
+Proces kompilacji, pliki obiektowe,  pliki biblioteczne, i dynamiczne biblioteczne, linkowanie
+\subsubsection{Proces kompilacji}
+\paragraph{preprocesor}
+Przygotowanie do kompilacji, np wykonywanie dyrektyw preprocesora (\#include, \#define), wstawianie definicji i makr.
+
+\paragraph{Kompilacja i optymalizacja}
+
+Proces zmieniający kod języka programowania, na język pośredni kompilatora, a następnie Assemblera. Kompilator sprawdza poprawność kodu źródłowego, i jeżeli nie wystąpią błędy, tworzy plik binarny, np. z rozszerzeniem o lub obj.  Dokonywana jest optymalizacja wykonywanych procedur. W trakcie kompilacji kod jest również dostosowywany do wybranej architektury i środowiska. 
+
+\paragraph{Asemblacja}
+
+Kod jest tłumaczony na język maszynowy.
+
+\paragraph{Linkowanie - konsolidacja}
+
+Polega na zebraniu wszystkich obiektów do razem i złączeniu ich w wykonywalny program, na przykład dodanie plików nagłówkowych albo referencji. Etap ten to wiązanie ze sobą funkcji, obiektów, itp. Pliki binarne, powstałe po kompilacji kodu źródłowego, łączone są z plikami binarnymi bibliotek: własnych, dostarczonych wraz z kompilatorem, lub innych.
+
+Kompilacja przebiega w kilku etapach i prowadzi do wytworzenia pliku obiektowego.
+
+\subsubsection{Pliki wykonywalne/obiektowe, biblioteki dynamiczne}
+
+Plik obiektowy składa się z:
+\begin{itemize}
+	\item nagłówek\\
+	Nagłówek umieszczany jest zawsze na początku pliku obiektowego w celu ustalenia dalszego sposobu postępowania z tym plikiem. 
+	\item kod maszynowy i dane\\
+	Kod i dane binarne przechowują instrukcje zrozumiałe dla procesora oraz dane wykorzystywane przez te instrukcje.
+	\item tablica symboli\\
+	Tablica symboli zawiera między innymi opisy funkcji i zmiennych eksportowanych przez plik obiektowy oraz opisy funkcji i zmiennych, do których ten plik się odwołuje.
+	\item informacje o relokacji\\
+	określają miejsca w kodzie binarnym, które należy zmodyfikować podczas konsolidacji. 
+	\item informacje dla programu uruchomieniowego
+\end{itemize}
+
+W systemach Unix formatem pliku obiektowego jest Executable and Linkable Format (ELF), lub przestarzałe a.out. \\
+
+
+\textbf{Pliki wykonywalne}  to plik, który może być uruchomiony bezpośrednio w środowisku systemu operacyjnego. Najczęściej zawiera binarną reprezentację instrukcji konkretnego typu procesora. Plikami wykonywalnymi są skrypty powłoki. \\
+
+\textbf{Biblioteka dynamiczna}  rodzaj biblioteki, która łączona jest z programem wykonywalnym dopiero w momencie jego wykonania. Dane z bibliotek dynamicznych mogą być współdzielone przez różne programy jednocześnie. Biblioteki sa ładowane do pamięci tylko raz, nawet jeśli są równocześnie współużytkowane.\\
+
+\textbf{Biblioteka statyczna}  rodzaj biblioteki funkcji, która łączona jest z programem w momencie konsolidacji
 
 \chapter{Komputer, architektura i oprogramowanie}
 \paragraph{Komputer} [ang. < łac. computare ‘rozważać’, ‘obliczyć’], elektroniczna maszyna cyfrowa, urządzenie elektroniczne przeznaczone do przetwarzania informacji (danych) przedstawionych w postaci cyfrowej, sterowane programem zapisanym w pamięci.
