@@ -38,7 +38,7 @@
 
 Główną częścią takiego sterownika jest mikrokontroler pełniący funkcję jednostki wykonującej operacje logiczne i arytmetyczne.
 
-\subsection{Sterownik PLC}
+\section{Sterownik PLC}
 
 \paragraph{Programowalny sterownik logiczny PLC} (ang. Programmable Logic Controller) uniwersalne urządzenie mikroprocesorowe przeznaczone do sterowania pracą maszyny lub urządzenia technologicznego. Sterownik PLC musi zostać dopasowany do określonego obiektu sterowania poprzez wprowadzenie do jego pamięci żądanego algorytmu działania obiektu - zaprogramowanie go. Cechą charakterystyczną sterowników PLC odróżniającą ten sterownik od innych sterowników komputerowych jest cykliczny obieg pamięci programu. Algorytm jest zapisywany w dedykowanym sterownikowi języku programowania. Istnieje możliwość zmiany algorytmu przez zmianę zawartości pamięci programu. Sterownik wyposaża się w odpowiednią liczbę układów wejściowych zbierających informacje o stanie obiektu i żądaniach obsługi oraz odpowiednią liczbę i rodzaj układów wyjściowych połączonych z elementami wykonawczymi, sygnalizacyjnymi lub transmisji danych. Układy I/O mogą być cyfrowe lub analogowe.
 
@@ -104,7 +104,7 @@ Analogowe sygnały wejściowe sterują: zaworami analogowymi, szybkością obrot
 \item samodiagnostyka.
 \end{itemize}
 
-\subsection{Regulator PID}
+\section{Regulator PID}
 
 \paragraph{Regulator PID} (ang. Proportional-Integral-Derivative controller) – regulator stosowany w układach regulacji składający się z trzech członów: proporcjonalnego, całkującego i różniczkującego. Najczęściej jego celem jest utrzymanie wartości wyjściowej na określonym poziomie, zwanym wartością zadaną. Jest najczęściej stosowanym regulatorem w przemyśle.\\
 
@@ -165,12 +165,12 @@ Transmitancja określona wzorem \eqref{wzor:PID_idealny} dotyczy regulatora idea
 G_r(s)=\dfrac{U'(s)}{E(s)} = k_p(1+\dfrac{1}{T_i \cdot s}+ \dfrac{T_d \cdot s}{T s + 1}),
 \end{equation}
 
-\subsection{Sterownik CNC}
+\section{Sterownik CNC}
 \paragraph{Sterownik CNC} (ang. Computer Numerical Control) to typ sterownika mikroprocesorowego, który programuje się za pomocą tzw. G code'u. Sterowniki te używane są m.in. do kontroli takich urządzeń jak: frezarki, tokarki a w szerszym zastosowaniu do sterowania robotami fabrycznymi, które pracują w tzw. trybie taśmy montażowej np. automaty składające podzespoły samochodowe.
 
 W nowoczesnych maszynach CNC stosuje się sterowniki pracujące na bazie komputera przemysłowego IPC w technologii ,,PC-based Automation''. W tej technologii sterownik CNC działa programowo, a nie sprzętowo, tak jak to odbywało się w starego typu dedykowanych sterownikach. System operacyjny czasu rzeczywistego sterownika, realizuje funkcje PLC, HMI i sterowania ruchem, odpowiadając za funkcjonalność całej maszyny.
 
-\subsection{Kontroler PAC}
+\section{Kontroler PAC}
 \paragraph{Sterowniki PAC} (ang.Programmable Automation Controller) zwane sterownikami automatyki są dużymi systemami sterownikowymi przeznaczonymi do obsługi złożonych procesów technologicznych. Wiele dotychczasowych sterowników PLC o największej wydajności zostało nazwanych przez producentów sterownikami PAC. Granica pomiędzy dużymi i wydajnymi sterownikami PLC a sterownikami PAC jest obecnie słabo widoczna.
 Współczesne procesy sterowania wykorzystują ogromne ilości sygnałów i danych, począwszy od analogowych i cyfrowych urządzeń wejścia/wyjścia, poprzez szybkie kamery wysokiej rozdzielczości, a kończąc na wieloosiowych
 sterownikach ruchu. Takie zastosowania, jak: szybka produkcja, monitoring pracy maszyn w czasie rzeczywistym, sterowanie precyzyjne czy sterowanie złożonym procesem, wymagają deterministycznych systemów akwizycji, zaawansowanej analizy i algorytmów przetwarzania danych.Wyższej klasy sterowniki PLC w pewnym stopniu spełniają te wymagania. Jednakże do wydajnego przetwarzania tych danych trzeba zastosować odpowiednie środki informatyczne, m.in. procesory zmiennoprzecinkowe i duże zasoby pamięci. Sterowniki PAC integrują tego rodzaju gotowe składniki sprzętowe w ramach systemu czasu rzeczywistego, oferując w ten sposób wydajną platformę dla inżynierów automatyki.
@@ -1215,11 +1215,40 @@ ograniczenia problemu.
 
 
 \textit{W praktyce każdy układ fizyczny jest nieliniowy. Model linowy powstaje
-	na podstawie przybliżenia zakładającego liniowość fizycznego
-	zjawiska i stałość parametrów lub w wyniku linearyzacji wyznaczonej
-	nieliniowej charakterystyki. Linearyzacje przeprowadza się zwłaszcza
-	wtedy, gdy działanie procesu ogranicza się do niewielkiego obszaru
-	wokół pewnego ustalonego punktu pracy.}
+na podstawie przybliżenia zakładającego liniowość fizycznego
+zjawiska i stałość parametrów lub w wyniku linearyzacji wyznaczonej
+nieliniowej charakterystyki. Linearyzacje przeprowadza się zwłaszcza
+wtedy, gdy działanie procesu ogranicza się do niewielkiego obszaru
+wokół pewnego ustalonego punktu pracy.}
+\paragraph{Ze względu na liczbę wejść i wyjść}
+\begin{itemize}
+\item Układy o jednym wejściu i jednym wyjściu.
+ \item  Układy o wielu wejściach lub wielu wyjściach.
+\end{itemize}
+\paragraph{Ze względu na  liczbę zmiennych niezależnych}
+\begin{itemize}
+\item Układy jednowymiarowe
+ \item Układy wielowymiarowe
+\end{itemize}
+
+\paragraph{Ze względu na czasowy charakter parametrów}
+\begin{itemize}
+\item Układy stacjonarne – parametry układu nie ulegają zmianie w czasie (lub ich zmiany są pomijalne)
+ \item Układy niestacjonarne – parametry układu ulegają zmianie w czasie
+\end{itemize}
+
+\paragraph{Ze względu  na zmienność struktury }
+\begin{itemize}
+\item Układy o stałej strukturze – takie, które w czasie swojego działania nie zmieniają liczby sygnałów pomiędzy poszczególnymi członami.)
+ \item Układy o zmiennej strukturze – układy nie spełniające powyższej zasady.
+\end{itemize}
+
+\paragraph{Ze względu na przestrzenny charakter parametrów  }
+\begin{itemize}
+\item Układy o parametrach skupionych
+ \item Układy o parametrach rozłożonych
+\end{itemize}
+\textit{Układ o parametrach rozłożonych – jeśli n $\to \infty $ (czyli jego przestrzeń stanów jest nieskończenie wymiarowa), to układ dynamiczny jest układem o parametrach rozłożonych lub układem nieskończenie wymiarowym. Przeciwieństwem układów o parametrach rozłożonych są układy o parametrach skupionych, dla których n\, przybiera bardzo duże wartości ale są to wartości skończone – dlatego układy takie nazywa się też układami skończenie wymiarowymi}.
 \section{Transmitancja operatorowa układu}
 \textbf{Transmitancja operatorowa}(funkcja przejścia, $G(s)$) - stosunek transformaty Laplace`a sygnału wyjściowego do transformaty Laplace`a sygnału wejściowego układu przy zerowych warunkach początkowych:
 \begin{center}
@@ -1282,6 +1311,16 @@ to system nazywamy stabilnym
 \end{center}
 przy czym bieguny transmitancji, dla których zachodzą równości, są co najwyżej jednokrotne.
 \subsection{Kryteria stabilności}
+Aby stwierdzić czy system o transmitancji
+\begin{center}
+$K(s)=\frac{L(s)}{M(s)} $
+\end{center}
+jest stabilny, wystarczy rozwiązaćjego równanie charakterystyczne $M(s)=0$, a następnie sprawdzić, czy wyznaczone w ten sposób pierwiastki mają ujemne części rzeczywiste 
+
+Rozwiązanie równania jest możliwe tylko dla $m\le 4 $ tzn. tylko wtedy można znaleźć jego pierwiastki przy użyciu takich działań jak dodawanie, odejmowanie, mnożenie i dzielenie oraz pierwiastkowanie. Równań wyższych stopni, poza szczególymi przypadkami, rozwiązać nie można.
+\begin{center}
+$M(s)=a_{m}s^{m}+a_{m-1}s^{m-1}+...+a_{1}s+a_{0} $
+\end{center}
 \paragraph{Twierdzenie o znaku współczynnków}
 Jest to warunek konieczny.
 
@@ -1296,7 +1335,9 @@ Jest to warunek wystarczający.
 \end{center}
 to żaden z pierwiastków wielomianu M(s)nie leży na osi $j\omega $
 Z twierdzenia wynika oczywisty wniosek, że jeśli wszystkie $ \Delta$ są większe od zera to system jest stabilny.
+\paragraph{Kryterium odpowiedzi skokowej}
 
+Układ zamknięty w odpowiedzi na skok jednostkowy powinien osiągać stan ustalony w czasie dążącym do nieskonczoności.
 
 \paragraph{Kryterium Hurwitza}
 Niech $ a_{m}>0$. System jest stabilny wtedy i tylko wtedy gdy :
